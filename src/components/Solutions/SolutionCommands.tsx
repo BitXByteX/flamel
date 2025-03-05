@@ -62,7 +62,7 @@ const SolutionCommands: React.FC<SolutionCommandsProps> = ({
   return (
     <div>
       <div className="pt-2 w-fit">
-        <div className="text-xs text-white/90 backdrop-blur-md bg-black/60 rounded-lg py-2 px-4 flex items-center justify-center gap-4">
+        <div className="text-xs text-white/90 backdrop-blur-md bg-black/60 rounded-3xl py-2 px-4 flex items-center justify-center gap-4">
           {/* Show/Hide - Always visible */}
           <div
             className="flex items-center gap-2 cursor-pointer rounded px-2 py-1.5 hover:bg-white/10 transition-colors"

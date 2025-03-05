@@ -57,7 +57,8 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
   return (
     <div>
       <div className="pt-2 w-fit">
-        <div className="text-xs text-white/90 backdrop-blur-md bg-black/60 rounded-lg py-2 px-4 flex items-center justify-center gap-4">
+        {/* <div className="text-xs text-white/90 backdrop-blur-md bg-black/60 rounded-3xl py-2 px-4 flex items-center justify-center gap-4 inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500  bg-gradient-to-r"> */}
+        <div className="text-xs text-white/90 backdrop-blur-md bg-black/60 rounded-3xl py-2 px-4 flex items-center justify-center gap-4">
           {/* Screenshot */}
           <div
             className="flex items-center gap-2 cursor-pointer rounded px-2 py-1.5 hover:bg-white/10 transition-colors"
