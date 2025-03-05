@@ -187,6 +187,26 @@ export function initializeIpcHandlers(deps: IIpcHandlerDeps): void {
     }
   })
 
+  ipcMain.handle("decrease-opacity", () => {
+    try {
+      deps.decreaseOpacity()
+      return { success: true }
+    } catch (error) {
+      console.error("Error decreasing window opacity:", error)
+      return { error: "Failed to Error decreasing window opacity" }
+    }
+  })
+
+  ipcMain.handle("increase-opacity", () => {
+    try {
+      deps.increaseOpacity()
+      return { success: true }
+    } catch (error) {
+      console.error("Error increasing window opacity:", error)
+      return { error: "Failed to increasing window opacity" }
+    }
+  })
+
   ipcMain.handle("reset-queues", async () => {
     try {
       deps.clearQueues()

@@ -36,6 +36,8 @@ interface ElectronAPI {
   onDebugError: (callback: (error: string) => void) => () => void
   openExternal: (url: string) => void
   toggleMainWindow: () => Promise<{ success: boolean; error?: string }>
+  decreaseOpacity: () => Promise<{ success: boolean; error?: string }>
+  increaseOpacity: () => Promise<{ success: boolean; error?: string }>
   triggerScreenshot: () => Promise<{ success: boolean; error?: string }>
   triggerProcessScreenshots: () => Promise<{ success: boolean; error?: string }>
   triggerReset: () => Promise<{ success: boolean; error?: string }>
@@ -202,6 +204,8 @@ const electronAPI = {
   triggerProcessScreenshots: () =>
     ipcRenderer.invoke("trigger-process-screenshots"),
   triggerReset: () => ipcRenderer.invoke("trigger-reset"),
+  decreaseOpacity: () => ipcRenderer.invoke("decrease-opacity"),
+  increaseOpacity: () => ipcRenderer.invoke("increase-opacity"),
   triggerMoveLeft: () => ipcRenderer.invoke("trigger-move-left"),
   triggerMoveRight: () => ipcRenderer.invoke("trigger-move-right"),
   triggerMoveUp: () => ipcRenderer.invoke("trigger-move-up"),

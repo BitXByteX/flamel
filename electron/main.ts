@@ -83,6 +83,8 @@ export interface IShortcutsHelperDeps {
   moveWindowRight: () => void
   moveWindowUp: () => void
   moveWindowDown: () => void
+  decreaseOpacity: () => void
+  increaseOpacity: () => void
 }
 
 export interface IIpcHandlerDeps {
@@ -105,6 +107,8 @@ export interface IIpcHandlerDeps {
   moveWindowRight: () => void
   moveWindowUp: () => void
   moveWindowDown: () => void
+  decreaseOpacity: () => void
+  increaseOpacity: () => void
 }
 
 // Initialize helpers
@@ -136,6 +140,8 @@ function initializeHelpers() {
     setView,
     isVisible: () => state.isWindowVisible,
     toggleMainWindow,
+    increaseOpacity,
+    decreaseOpacity,
     moveWindowLeft: () =>
       moveWindowHorizontal((x) =>
         Math.max(-(state.windowSize?.width || 0) / 2, x - state.step)
@@ -404,7 +410,7 @@ function showMainWindow(): void {
     state.mainWindow.setOpacity(0)
     state.mainWindow.showInactive()
     // Adjust solution background opacity
-    state.mainWindow.setOpacity(0.85)
+    state.mainWindow.setOpacity(0.9)
     state.isWindowVisible = true
   }
 }
@@ -412,6 +418,24 @@ function showMainWindow(): void {
 function toggleMainWindow(): void {
   state.isWindowVisible ? hideMainWindow() : showMainWindow()
 }
+
+function decreaseOpacity(): void {
+  if (state.mainWindow) {
+    let currentOpacity = state.mainWindow.getOpacity();
+    let newOpacity = Math.max(currentOpacity - 0.05, 0.2); // Prevents opacity from going below 0.1
+    state.mainWindow.setOpacity(newOpacity);
+  }
+}
+
+function increaseOpacity(): void {
+  if (state.mainWindow) {
+    let currentOpacity = state.mainWindow.getOpacity(); // Get current opacity
+    let newOpacity = Math.min(currentOpacity + 0.05, 1); // Increase by 0.05 but cap at 1
+    state.mainWindow.setOpacity(newOpacity); // Set the new opacity
+  }
+}
+
+
 
 // Window movement functions
 function moveWindowHorizontal(updateFn: (x: number) => number): void {
@@ -506,6 +530,8 @@ async function initializeApp() {
       takeScreenshot,
       getView,
       toggleMainWindow,
+      decreaseOpacity,
+      increaseOpacity,
       clearQueues,
       setView,
       moveWindowLeft: () =>
@@ -662,6 +688,8 @@ export {
   hideMainWindow,
   showMainWindow,
   toggleMainWindow,
+  decreaseOpacity,
+  increaseOpacity,
   setWindowDimensions,
   moveWindowHorizontal,
   moveWindowVertical,

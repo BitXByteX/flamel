@@ -79,6 +79,14 @@ export class ShortcutsHelper {
       this.deps.toggleMainWindow()
     })
 
+    globalShortcut.register("CommandOrControl+[", () => {
+      this.deps.decreaseOpacity()
+    })
+
+    globalShortcut.register("CommandOrControl+]", () => {
+      this.deps.increaseOpacity()
+    })
+
     // Unregister shortcuts when quitting
     app.on("will-quit", () => {
       globalShortcut.unregisterAll()
