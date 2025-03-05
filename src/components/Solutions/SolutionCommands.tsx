@@ -277,6 +277,94 @@ const SolutionCommands: React.FC<SolutionCommandsProps> = ({
                         </p>
                       </div>
 
+                      {/* Decrease Opacity Command */}
+                      <div
+                        className="cursor-pointer rounded px-2 py-1.5 hover:bg-white/10 transition-colors"
+                        onClick={async () => {
+                          try {
+                            const result =
+                              await window.electronAPI.decreaseOpacity()
+                            if (!result.success) {
+                              console.error(
+                                "Failed to decrease window opacity:",
+                                result.error
+                              )
+                              showToast(
+                                "Error",
+                                "Failed to decrease window opacity",
+                                "error"
+                              )
+                            }
+                          } catch (error) {
+                            console.error("Error decreasing window opacity:", error)
+                            showToast(
+                              "Error",
+                              "Failed to decrease window opacity",
+                              "error"
+                            )
+                          }
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="truncate">Decrease Opacity</span>
+                          <div className="flex gap-1 flex-shrink-0">
+                            <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px] leading-none">
+                              {COMMAND_KEY}
+                            </span>
+                            <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px] leading-none">
+                              {`[`}
+                            </span>
+                          </div>
+                        </div>
+                        <p className="text-[10px] leading-relaxed text-white/70 truncate mt-1">
+                          Decrease window opacity.
+                        </p>
+                      </div>
+
+                      {/* Increase Opacity Command */}
+                      <div
+                        className="cursor-pointer rounded px-2 py-1.5 hover:bg-white/10 transition-colors"
+                        onClick={async () => {
+                          try {
+                            const result =
+                              await window.electronAPI.increaseOpacity()
+                            if (!result.success) {
+                              console.error(
+                                "Failed to increase window opacity:",
+                                result.error
+                              )
+                              showToast(
+                                "Error",
+                                "Failed to increase window opacity",
+                                "error"
+                              )
+                            }
+                          } catch (error) {
+                            console.error("Error increasing window opacity:", error)
+                            showToast(
+                              "Error",
+                              "Failed to increase window opacity",
+                              "error"
+                            )
+                          }
+                        }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="truncate">Increase Opacity</span>
+                          <div className="flex gap-1 flex-shrink-0">
+                            <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px] leading-none">
+                              {COMMAND_KEY}
+                            </span>
+                            <span className="bg-white/20 px-1.5 py-0.5 rounded text-[10px] leading-none">
+                              {`]`}
+                            </span>
+                          </div>
+                        </div>
+                        <p className="text-[10px] leading-relaxed text-white/70 truncate mt-1">
+                          Increase window opacity.
+                        </p>
+                      </div>
+
                       {/* Screenshot and Debug commands - Only show if not processing */}
                       {!isProcessing && (
                         <>
