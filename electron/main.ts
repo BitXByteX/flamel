@@ -236,10 +236,13 @@ async function createWindow(): Promise<void> {
   state.step = 60
   state.currentY = 50
 
+  // Define a dynamic width (can be a percentage of screen width or fixed)
+  const windowWidth = Math.round(state.screenWidth * 0.15);
+
   const windowSettings: Electron.BrowserWindowConstructorOptions = {
     height: 600,
-
-    x: state.currentX,
+    x: Math.round((state.screenWidth - windowWidth) / 2), // Center horizontally
+    // x: state.currentX,
     y: 50,
     alwaysOnTop: true,
     webPreferences: {
