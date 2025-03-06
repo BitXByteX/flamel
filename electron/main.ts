@@ -160,18 +160,18 @@ function initializeHelpers() {
 
 // Auth callback handler
 
-// Register the interview-coder protocol
+// Register the crack-coding-interview protocol
 if (process.platform === "darwin") {
-  app.setAsDefaultProtocolClient("interview-coder")
+  app.setAsDefaultProtocolClient("crack-coding-interview")
 } else {
-  app.setAsDefaultProtocolClient("interview-coder", process.execPath, [
+  app.setAsDefaultProtocolClient("crack-coding-interview", process.execPath, [
     path.resolve(process.argv[1] || "")
   ])
 }
 
 // Handle the protocol. In this case, we choose to show an Error Box.
 if (process.defaultApp && process.argv.length >= 2) {
-  app.setAsDefaultProtocolClient("interview-coder", process.execPath, [
+  app.setAsDefaultProtocolClient("crack-coding-interview", process.execPath, [
     path.resolve(process.argv[1])
   ])
 }
@@ -307,9 +307,9 @@ async function createWindow(): Promise<void> {
   // Configure window behavior
   state.mainWindow.webContents.setZoomFactor(1)
   // Commenting DevTools temporarily
-  // if (isDev) {
-  //   state.mainWindow.webContents.openDevTools()
-  // }
+  if (isDev) {
+    state.mainWindow.webContents.openDevTools()
+  }
   state.mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     console.log("Attempting to open URL:", url)
     if (url.includes("google.com") || url.includes("supabase.co")) {
@@ -572,7 +572,7 @@ async function initializeApp() {
 app.on("open-url", (event, url) => {
   console.log("open-url event received:", url)
   event.preventDefault()
-  if (url.startsWith("interview-coder://")) {
+  if (url.startsWith("crack-coding-interview://")) {
     handleAuthCallback(url, state.mainWindow)
   }
 })
@@ -580,7 +580,7 @@ app.on("open-url", (event, url) => {
 // Handle the auth callback in production (Windows/Linux)
 app.on("second-instance", (event, commandLine) => {
   console.log("second-instance event received:", commandLine)
-  const url = commandLine.find((arg) => arg.startsWith("interview-coder://"))
+  const url = commandLine.find((arg) => arg.startsWith("crack-coding-interview://"))
   if (url) {
     handleAuthCallback(url, state.mainWindow)
   }
