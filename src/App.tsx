@@ -363,7 +363,7 @@ function AuthForm() {
                 options: {
                     redirectTo: import.meta.env.DEV
                         ? "http://localhost:54321/callback"
-                        : "interview-coder://callback",
+                        : "crack-coding-interview://callback",
                     skipBrowserRedirect: false,
                 },
             });
@@ -449,13 +449,23 @@ function AuthForm() {
                                         }
                                         className={`w-full px-4 py-3 text-white rounded-2xl border focus:outline-none text-sm font-medium placeholder:text-[#989898] placeholder:font-medium transition-colors frosted-glass ${
                                             error
-                                                ? error == "Please check your email to confirm your account" ? "border-[#d9cd79] focus:border-[#d9cd79]" : "border-red-500 focus:border-red-500"
+                                                ? error ==
+                                                  "Please check your email to confirm your account"
+                                                    ? "border-[#d9cd79] focus:border-[#d9cd79]"
+                                                    : "border-red-500 focus:border-red-500"
                                                 : "border-white/10 focus:border-white/20"
                                         } ${shake ? "shake" : ""}`}
                                         required
                                     />
                                     {error && (
-                                        <p className={`text-sm ${error == "Please check your email to confirm your account" ? "text-[#e7df66]" : "text-red-500"} px-1`}>
+                                        <p
+                                            className={`text-sm ${
+                                                error ==
+                                                "Please check your email to confirm your account"
+                                                    ? "text-[#e7df66]"
+                                                    : "text-red-500"
+                                            } px-1`}
+                                        >
                                             {error}
                                         </p>
                                     )}
