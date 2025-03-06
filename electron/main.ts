@@ -85,6 +85,7 @@ export interface IShortcutsHelperDeps {
   moveWindowDown: () => void
   decreaseOpacity: () => void
   increaseOpacity: () => void
+  quitApp: () => void
 }
 
 export interface IIpcHandlerDeps {
@@ -109,6 +110,7 @@ export interface IIpcHandlerDeps {
   moveWindowDown: () => void
   decreaseOpacity: () => void
   increaseOpacity: () => void
+  quitApp: () => void
 }
 
 // Initialize helpers
@@ -142,6 +144,7 @@ function initializeHelpers() {
     toggleMainWindow,
     increaseOpacity,
     decreaseOpacity,
+    quitApp,
     moveWindowLeft: () =>
       moveWindowHorizontal((x) =>
         Math.max(-(state.windowSize?.width || 0) / 2, x - state.step)
@@ -439,6 +442,9 @@ function increaseOpacity(): void {
   }
 }
 
+function quitApp(): void {
+  app.quit()
+}
 
 
 // Window movement functions
@@ -536,6 +542,7 @@ async function initializeApp() {
       toggleMainWindow,
       decreaseOpacity,
       increaseOpacity,
+      quitApp,
       clearQueues,
       setView,
       moveWindowLeft: () =>
@@ -694,6 +701,7 @@ export {
   toggleMainWindow,
   decreaseOpacity,
   increaseOpacity,
+  quitApp,
   setWindowDimensions,
   moveWindowHorizontal,
   moveWindowVertical,

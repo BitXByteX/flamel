@@ -87,6 +87,10 @@ export class ShortcutsHelper {
       this.deps.increaseOpacity()
     })
 
+    globalShortcut.register("CommandOrControl+Q", () => {
+      this.deps.quitApp()
+    })
+
     // Unregister shortcuts when quitting
     app.on("will-quit", () => {
       globalShortcut.unregisterAll()

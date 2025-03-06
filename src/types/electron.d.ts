@@ -32,6 +32,7 @@ export interface ElectronAPI {
   openExternal: (url: string) => void
   decreaseOpacity: () => Promise<{ success: boolean; error?: string }>
   increaseOpacity: () => Promise<{ success: boolean; error?: string }>
+  quitApp: () => Promise<{ success: boolean; error?: string }>
   toggleMainWindow: () => Promise<{ success: boolean; error?: string }>
   triggerScreenshot: () => Promise<{ success: boolean; error?: string }>
   triggerProcessScreenshots: () => Promise<{ success: boolean; error?: string }>

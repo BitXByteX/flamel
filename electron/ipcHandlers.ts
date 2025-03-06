@@ -207,6 +207,16 @@ export function initializeIpcHandlers(deps: IIpcHandlerDeps): void {
     }
   })
 
+  ipcMain.handle("quit-app", () => {
+    try {
+      deps.quitApp()
+      return { success: true }
+    } catch (error) {
+      console.error("Error quitting app:", error)
+      return { error: "Failed to quit app" }
+    }
+  })
+
   ipcMain.handle("reset-queues", async () => {
     try {
       deps.clearQueues()

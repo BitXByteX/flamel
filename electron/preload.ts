@@ -38,6 +38,7 @@ interface ElectronAPI {
   toggleMainWindow: () => Promise<{ success: boolean; error?: string }>
   decreaseOpacity: () => Promise<{ success: boolean; error?: string }>
   increaseOpacity: () => Promise<{ success: boolean; error?: string }>
+  quitApp: () => Promise<{ success: boolean; error?: string }>
   triggerScreenshot: () => Promise<{ success: boolean; error?: string }>
   triggerProcessScreenshots: () => Promise<{ success: boolean; error?: string }>
   triggerReset: () => Promise<{ success: boolean; error?: string }>
@@ -206,6 +207,7 @@ const electronAPI = {
   triggerReset: () => ipcRenderer.invoke("trigger-reset"),
   decreaseOpacity: () => ipcRenderer.invoke("decrease-opacity"),
   increaseOpacity: () => ipcRenderer.invoke("increase-opacity"),
+  quitApp: () => ipcRenderer.invoke("quit-app"),
   triggerMoveLeft: () => ipcRenderer.invoke("trigger-move-left"),
   triggerMoveRight: () => ipcRenderer.invoke("trigger-move-right"),
   triggerMoveUp: () => ipcRenderer.invoke("trigger-move-up"),
