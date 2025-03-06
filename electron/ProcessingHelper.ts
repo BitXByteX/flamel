@@ -9,7 +9,8 @@ import { BrowserWindow } from "electron"
 // Commenting below code temporary to use interviewcoder api while development
 const isDev = !app.isPackaged
 const API_BASE_URL = isDev
-  ? "http://localhost:3000"
+  // ? "http://localhost:3000"
+  ? "https://www.interviewcoder.co"
   : "https://www.crackcodinginterview.com"
 
 export class ProcessingHelper {
