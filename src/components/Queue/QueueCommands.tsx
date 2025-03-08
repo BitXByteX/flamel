@@ -4,6 +4,7 @@ import { supabase } from "../../lib/supabase";
 import { useToast } from "../../contexts/toast";
 import { LanguageSelector } from "../shared/LanguageSelector";
 import { COMMAND_KEY } from "../../utils/platform";
+import { ThemeSelector } from "../shared/ThemeSelector";
 
 interface QueueCommandsProps {
     onTooltipVisibilityChange: (visible: boolean, height: number) => void;
@@ -11,6 +12,8 @@ interface QueueCommandsProps {
     credits: number;
     currentLanguage: string;
     setLanguage: (language: string) => void;
+    currentTheme: string;
+    setTheme: (theme: string) => void;
 }
 
 const QueueCommands: React.FC<QueueCommandsProps> = ({
@@ -19,6 +22,8 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
     credits,
     currentLanguage,
     setLanguage,
+    currentTheme,
+    setTheme,
 }) => {
     const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const tooltipRef = useRef<HTMLDivElement>(null);
@@ -58,7 +63,7 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
         <div>
             <div className="pt-2 w-fit">
                 {/* <div className="text-xs text-white/90 backdrop-blur-md bg-black/60 rounded-3xl py-2 px-4 flex items-center justify-center gap-4 inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500  bg-gradient-to-r"> */}
-                <div className="text-xs text-white/90 backdrop-blur-md bg-black/60 rounded-3xl py-2 px-4 flex items-center justify-center gap-4">
+                <div className="text-xs text-white/90 backdrop-blur-md bg-cciGradientPrimary rounded-3xl py-2 px-4 flex items-center justify-center gap-4">
                     {/* Screenshot */}
                     <div
                         className="flex items-center gap-2 cursor-pointer rounded px-2 py-1.5 hover:bg-white/10 transition-colors"
@@ -203,7 +208,8 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
                             >
                                 {/* Add transparent bridge */}
                                 <div className="absolute -top-2 right-0 w-full h-2" />
-                                <div className="p-3 text-xs bg-black/80 backdrop-blur-md rounded-lg border border-white/10 text-white/90 shadow-lg">
+                                {/* <div className="p-3 text-xs bg-black/80 backdrop-blur-md rounded-lg border border-white/10 text-white/90 shadow-lg"> */}
+                                <div className="p-3 text-xs bg-cciGradientSecondary backdrop-blur-md rounded-lg border border-white/10 text-white/90 shadow-lg">
                                     <div className="space-y-4">
                                         <h3 className="font-medium truncate">
                                             Keyboard Shortcuts
@@ -521,6 +527,13 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
                                                     currentLanguage
                                                 }
                                                 setLanguage={setLanguage}
+                                            />
+
+                                            <ThemeSelector
+                                                currentTheme={
+                                                    currentTheme
+                                                }
+                                                setTheme={setTheme}
                                             />
 
                                             {/* Credits Display */}

@@ -535,6 +535,7 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
     const [isSubscribed, setIsSubscribed] = useState(false);
     const [credits, setCredits] = useState<number | undefined>(undefined);
     const [currentLanguage, setCurrentLanguage] = useState<string>("python");
+    const [currentTheme, setCurrentTheme] = useState<string>("light");
     const queryClient = useQueryClient();
 
     // Check auth state on mount
@@ -572,6 +573,9 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
                 if (subscription?.preferred_language) {
                     setCurrentLanguage(subscription.preferred_language);
                     window.__LANGUAGE__ = subscription.preferred_language;
+                }
+                if (subscription?.preferred_theme) {
+                    setCurrentTheme(subscription.preferred_theme);
                 }
             } finally {
                 setSubscriptionLoading(false);
@@ -623,6 +627,9 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
                             window.__LANGUAGE__ =
                                 subscription.preferred_language;
                         }
+                        if (subscription?.preferred_theme) {
+                            setCurrentTheme(subscription.preferred_theme);
+                        }
                         await queryClient.invalidateQueries({
                             queryKey: ["user"],
                         });
@@ -640,6 +647,9 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
                             setCurrentLanguage(payload.new.preferred_language);
                             window.__LANGUAGE__ =
                                 payload.new.preferred_language;
+                        }
+                        if (payload.new.preferred_theme) {
+                            setCurrentTheme(payload.new.preferred_theme);
                         }
                         await queryClient.invalidateQueries({
                             queryKey: ["user"],
@@ -694,6 +704,8 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
             credits={credits!}
             currentLanguage={currentLanguage}
             setLanguage={setCurrentLanguage}
+            currentTheme={currentTheme}
+            setTheme={setCurrentTheme}
         />
     );
 }

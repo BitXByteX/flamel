@@ -9,12 +9,16 @@ interface SubscribedAppProps {
   credits: number
   currentLanguage: string
   setLanguage: (language: string) => void
+  currentTheme: string
+  setTheme: (theme: string) => void
 }
 
 const SubscribedApp: React.FC<SubscribedAppProps> = ({
   credits,
   currentLanguage,
-  setLanguage
+  setLanguage,
+  currentTheme,
+  setTheme,
 }) => {
   const queryClient = useQueryClient()
   const [view, setView] = useState<"queue" | "solutions" | "debug">("queue")
@@ -125,13 +129,15 @@ const SubscribedApp: React.FC<SubscribedAppProps> = ({
   }, [view])
 
   return (
-    <div ref={containerRef} className="min-h-0">
+    <div ref={containerRef} className={`min-h-0 ${currentTheme}`}>
       {view === "queue" ? (
         <Queue
           setView={setView}
           credits={credits}
           currentLanguage={currentLanguage}
           setLanguage={setLanguage}
+          currentTheme={currentTheme}
+          setTheme={setTheme}
         />
       ) : view === "solutions" ? (
         <Solutions

@@ -98,7 +98,7 @@ export const  LanguageSelector: React.FC<LanguageSelectorProps> = ({
 
           {/* Dropdown List - Now Inside Relative Container */}
           {isOpen && (
-            <div className="absolute left-0 top-full mt-1 w-full bg-black text-white rounded shadow-lg z-50">
+            <div className="absolute left-0 top-full mt-1 w-full bg-black/80 text-white rounded shadow-lg z-50">
               {languages.map((lang) => (
                 <div
                   key={lang.value}

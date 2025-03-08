@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require("tailwindcss/plugin");
+
 export default {
   content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   theme: {
@@ -42,8 +44,43 @@ export default {
             opacity: 0.5
           }
         }
-      }
+      },
+      colors: {
+        cciPrimary: "var(--cci-primary)",
+        cciSecondary: "var(--cci-secondary)",
+        cciPrimaryHover: "var(--cci-primary-hover)",
+      },
+      backgroundImage: {
+        cciGradientPrimary: "var(--cci-gradient)",
+        cciGradientSecondary: "var(--cci-gradient-secondary)",
+      },
     }
   },
-  plugins: []
+  plugins: [
+    plugin(({ addBase }) => {
+      addBase({
+        ":root": {
+          "--cci-primary": "#645BFB",
+          "--cci-secondary": "#e34ca8",
+          "--cci-primary-hover": "#6352f7",
+          "--cci-gradient": "linear-gradient(to top, rgba(71, 71, 73, 0.6), rgba(138, 121, 155,0.6), rgba(59, 27, 47,0.6))",
+          "--cci-gradient-secondary": "linear-gradient(to top, rgba(71, 71, 73, 0.8), rgba(138, 121, 155,0.8), rgba(59, 27, 47,0.8))",
+        },
+        ".dark": {
+          "--cci-primary": "#1E1E2E",
+          "--cci-secondary": "#BB86FC",
+          "--cci-primary-hover": "#3700B3",
+          "--cci-gradient": "linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6))",
+          "--cci-gradient-secondary": "linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8))",
+        },
+        ".special": {
+          "--cci-primary": "#FF5733",
+          "--cci-secondary": "#33FFBD",
+          "--cci-primary-hover": "#FF4500",
+          "--cci-gradient": "linear-gradient(to right,rgba(255, 88, 51, 0.6),rgba(255, 190, 51, 0.6),rgba(51, 255, 88, 0.6))",
+          "--cci-gradient-secondary": "linear-gradient(to right,rgba(255, 88, 51, 0.8),rgba(255, 190, 51, 0.8),rgba(51, 255, 88, 0.8))",
+        },
+      });
+    }),
+  ],
 }
