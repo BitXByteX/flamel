@@ -97,7 +97,7 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
                     >
                         <span className="text-[11px] leading-none truncate">
                             {screenshotCount === 0
-                                ? "Take first screenshot"
+                                ? "Take screenshot"
                                 : screenshotCount === 1
                                 ? "Take second screenshot"
                                 : "Reset first screenshot"}

@@ -2,7 +2,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+// import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import ScreenshotQueue from "../components/Queue/ScreenshotQueue";
 
@@ -28,7 +29,7 @@ export const ContentSection = ({
         {isLoading ? (
             <div className="mt-4 flex">
                 <p className="text-xs bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 bg-clip-text text-transparent animate-pulse">
-                    Extracting problem statement...
+                    Analyzing the problem statement...
                 </p>
             </div>
         ) : (
@@ -68,7 +69,7 @@ const SolutionSection = ({
                     language={
                         currentLanguage == "golang" ? "go" : currentLanguage
                     }
-                    style={dracula}
+                    style={atomDark}
                     customStyle={{
                         maxWidth: "100%",
                         margin: 0,
@@ -127,12 +128,16 @@ export interface SolutionsProps {
     credits: number;
     currentLanguage: string;
     setLanguage: (language: string) => void;
+    currentTheme: string;
+    setTheme: (theme: string) => void;
 }
 const Solutions: React.FC<SolutionsProps> = ({
     setView,
     credits,
     currentLanguage,
     setLanguage,
+    currentTheme,
+    setTheme,
 }) => {
     const queryClient = useQueryClient();
     const contentRef = useRef<HTMLDivElement>(null);
@@ -474,16 +479,18 @@ const Solutions: React.FC<SolutionsProps> = ({
                         credits={credits}
                         currentLanguage={currentLanguage}
                         setLanguage={setLanguage}
+                        currentTheme={currentTheme}
+                        setTheme={setTheme}
                     />
 
                     {/* Main Content - Modified width constraints */}
-                    <div className="w-full text-sm text-black bg-black/60 rounded-md">
+                    <div className="w-full text-sm text-black bg-cciGradientSecondary rounded-md">
                         <div className="rounded-lg overflow-hidden">
                             <div className="px-4 py-3 space-y-4 max-w-full">
                                 {!solutionData && (
                                     <>
                                         <ContentSection
-                                            title="Problem Statement"
+                                            title="Task Outline"
                                             content={
                                                 problemStatementData?.problem_statement
                                             }
@@ -492,7 +499,7 @@ const Solutions: React.FC<SolutionsProps> = ({
                                         {problemStatementData && (
                                             <div className="mt-4 flex">
                                                 <p className="text-xs bg-gradient-to-r from-gray-300 via-gray-100 to-gray-300 bg-clip-text text-transparent animate-pulse">
-                                                    Generating solutions...
+                                                    Generating the best solutions...
                                                 </p>
                                             </div>
                                         )}
@@ -501,8 +508,14 @@ const Solutions: React.FC<SolutionsProps> = ({
 
                                 {solutionData && (
                                     <>
+                                        <SolutionSection
+                                            title={`${COMMAND_KEY} + Arrow keys to move`}
+                                            content={solutionData}
+                                            isLoading={!solutionData}
+                                            currentLanguage={currentLanguage}
+                                        />
                                         <ContentSection
-                                            title={`My Thoughts (${COMMAND_KEY} + Arrow keys to scroll)`}
+                                            title={`Explanation`}
                                             content={
                                                 thoughtsData && (
                                                     <div className="space-y-3">
@@ -518,7 +531,7 @@ const Solutions: React.FC<SolutionsProps> = ({
                                                                         }
                                                                         className="flex items-start gap-2"
                                                                     >
-                                                                        <div className="w-1 h-1 rounded-full bg-blue-400/80 mt-2 shrink-0" />
+                                                                        <div className="w-1 h-1 rounded-full bg-slate-500/90 mt-2 shrink-0" />
                                                                         <div>
                                                                             {
                                                                                 thought
@@ -532,13 +545,6 @@ const Solutions: React.FC<SolutionsProps> = ({
                                                 )
                                             }
                                             isLoading={!thoughtsData}
-                                        />
-
-                                        <SolutionSection
-                                            title="Solution"
-                                            content={solutionData}
-                                            isLoading={!solutionData}
-                                            currentLanguage={currentLanguage}
                                         />
 
                                         <ComplexitySection

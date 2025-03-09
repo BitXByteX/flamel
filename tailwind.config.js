@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"]
+        sans: ["Signika", "Inter", "system-ui", "sans-serif"]
       },
       animation: {
         in: "in 0.2s ease-out",
@@ -63,8 +63,8 @@ export default {
           "--cci-primary": "#645BFB",
           "--cci-secondary": "#e34ca8",
           "--cci-primary-hover": "#6352f7",
-          "--cci-gradient": "linear-gradient(to top, rgba(71, 71, 73, 0.6), rgba(138, 121, 155,0.6), rgba(59, 27, 47,0.6))",
-          "--cci-gradient-secondary": "linear-gradient(to top, rgba(71, 71, 73, 0.8), rgba(138, 121, 155,0.8), rgba(59, 27, 47,0.8))",
+          "--cci-gradient": "linear-gradient(to bottom, rgba(9,28,47, 0.6), rgba(9,28,47, 0.6))",
+          "--cci-gradient-secondary": "linear-gradient(to bottom, rgba(9,28,47, 0.8), rgba(9,28,47, 0.8))",
         },
         ".dark": {
           "--cci-primary": "#1E1E2E",
@@ -77,8 +77,8 @@ export default {
           "--cci-primary": "#FF5733",
           "--cci-secondary": "#33FFBD",
           "--cci-primary-hover": "#FF4500",
-          "--cci-gradient": "linear-gradient(to right,rgba(255, 88, 51, 0.6),rgba(255, 190, 51, 0.6),rgba(51, 255, 88, 0.6))",
-          "--cci-gradient-secondary": "linear-gradient(to right,rgba(255, 88, 51, 0.8),rgba(255, 190, 51, 0.8),rgba(51, 255, 88, 0.8))",
+          "--cci-gradient": "linear-gradient(to top, rgba(71, 71, 73, 0.6), rgba(138, 121, 155,0.6), rgba(59, 27, 47,0.6))",
+          "--cci-gradient-secondary": "linear-gradient(to top, rgba(71, 71, 73, 0.8), rgba(138, 121, 155,0.8), rgba(59, 27, 47,0.8))",
         },
       });
     }),

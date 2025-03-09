@@ -145,6 +145,8 @@ const SubscribedApp: React.FC<SubscribedAppProps> = ({
           credits={credits}
           currentLanguage={currentLanguage}
           setLanguage={setLanguage}
+          currentTheme={currentTheme}
+          setTheme={setTheme}
         />
       ) : null}
     </div>
