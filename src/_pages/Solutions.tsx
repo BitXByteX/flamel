@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 // import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 
 import ScreenshotQueue from "../components/Queue/ScreenshotQueue";
 
@@ -69,7 +69,7 @@ const SolutionSection = ({
                     language={
                         currentLanguage == "golang" ? "go" : currentLanguage
                     }
-                    style={atomDark}
+                    style={tomorrow}
                     customStyle={{
                         maxWidth: "100%",
                         margin: 0,
