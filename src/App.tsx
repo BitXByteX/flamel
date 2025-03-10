@@ -365,12 +365,15 @@ function AuthForm() {
                         ? "http://localhost:54321/callback"
                         : "crack-coding-interview://callback",
                     skipBrowserRedirect: false,
+                    queryParams: {
+                        prompt: "select_account", // Forces account selection
+                    },
                 },
             });
 
             // Set auth token immediately if we have it
             if (data?.session?.access_token) {
-                window.__AUTH_TOKEN__ = data.session.access_token
+                window.__AUTH_TOKEN__ = data.session.access_token;
             }
 
             if (error) throw error;
@@ -547,35 +550,37 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
     useEffect(() => {
         // First check if we have an existing session
         const checkExistingSession = async () => {
-            const { data: { session } } = await supabase.auth.getSession()
+            const {
+                data: { session },
+            } = await supabase.auth.getSession();
             if (session?.access_token) {
-                window.__AUTH_TOKEN__ = session.access_token
-                setUser(session.user)
-                setLoading(false)
+                window.__AUTH_TOKEN__ = session.access_token;
+                setUser(session.user);
+                setLoading(false);
             }
-        }
-        
-        checkExistingSession()
-  
+        };
+
+        checkExistingSession();
+
         const {
             data: { subscription },
         } = supabase.auth.onAuthStateChange((event, session) => {
             setUser(session?.user ?? null);
             // Set the auth token in the window object
-            window.__AUTH_TOKEN__ = session?.access_token || null
+            window.__AUTH_TOKEN__ = session?.access_token || null;
             setLoading(false);
 
             // If this is a SIGNED_IN event from OAuth, ensure we have the token
-            if (event === 'SIGNED_IN' && session?.access_token) {
-                window.__AUTH_TOKEN__ = session.access_token
+            if (event === "SIGNED_IN" && session?.access_token) {
+                window.__AUTH_TOKEN__ = session.access_token;
             }
         });
 
         return () => {
-            subscription.unsubscribe()
+            subscription.unsubscribe();
             // Clear the token on cleanup
-            window.__AUTH_TOKEN__ = null
-          }
+            window.__AUTH_TOKEN__ = null;
+        };
     }, []);
 
     // Check subscription and credits status whenever user changes
