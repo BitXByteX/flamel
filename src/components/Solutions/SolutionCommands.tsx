@@ -671,7 +671,7 @@ const SolutionCommands: React.FC<SolutionCommandsProps> = ({
                                                     <span>
                                                         Credits Remaining
                                                     </span>
-                                                    <span>{credits} / 50</span>
+                                                    <span>{credits}</span>
                                                 </div>
                                                 <div className="text-[11px] text-white/50">
                                                     Refill at{" "}

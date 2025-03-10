@@ -542,7 +542,7 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
                                                     <span>
                                                         Credits Remaining
                                                     </span>
-                                                    <span>{credits} / 50</span>
+                                                    <span>{credits}</span>
                                                 </div>
                                                 <div className="text-[11px] text-white/50">
                                                     Refill at{" "}
