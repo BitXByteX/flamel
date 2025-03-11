@@ -2,7 +2,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query"
 import React, { useEffect, useRef, useState } from "react"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
-import { dracula } from "react-syntax-highlighter/dist/esm/styles/prism"
+import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import ScreenshotQueue from "../components/Queue/ScreenshotQueue"
 import SolutionCommands from "../components/Solutions/SolutionCommands"
 import { Screenshot } from "../types/screenshots"
@@ -35,7 +35,7 @@ const CodeSection = ({
         <SyntaxHighlighter
           showLineNumbers
           language={currentLanguage == "golang" ? "go" : currentLanguage}
-          style={dracula}
+          style={tomorrow}
           customStyle={{
             maxWidth: "100%",
             margin: 0,
@@ -74,13 +74,17 @@ interface DebugProps {
   setIsProcessing: (isProcessing: boolean) => void
   currentLanguage: string
   setLanguage: (language: string) => void
+  currentTheme: string;
+  setTheme: (theme: string) => void;
 }
 
 const Debug: React.FC<DebugProps> = ({
   isProcessing,
   setIsProcessing,
   currentLanguage,
-  setLanguage
+  setLanguage,
+  currentTheme,
+  setTheme,
 }) => {
   const [tooltipVisible, setTooltipVisible] = useState(false)
   const [tooltipHeight, setTooltipHeight] = useState(0)
@@ -219,15 +223,17 @@ const Debug: React.FC<DebugProps> = ({
         credits={window.__CREDITS__}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
+        currentTheme={currentTheme}
+        setTheme={setTheme}
       />
 
       {/* Main Content */}
-      <div className="w-full text-sm text-black bg-black/60 rounded-md">
+      <div className="w-full text-sm text-black bg-cciGradientSecondary rounded-md">
         <div className="rounded-lg overflow-hidden">
           <div className="px-4 py-3 space-y-4">
             {/* Thoughts Section */}
             <ContentSection
-              title="What I Changed"
+              title="What Changed"
               content={
                 thoughtsData && (
                   <div className="space-y-3">

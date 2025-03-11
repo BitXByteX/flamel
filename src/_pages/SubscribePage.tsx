@@ -82,7 +82,7 @@ export default function SubscribePage({ user }: SubscribePageProps) {
                     ⌘
                   </kbd>
                   <kbd className="bg-white/[0.07] border border-white/[0.1] rounded-md px-1.5 py-1 text-[10px] leading-none text-white/60">
-                    B
+                    Tab
                   </kbd>
                 </div>
               </div>

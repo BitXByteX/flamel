@@ -449,6 +449,8 @@ const Solutions: React.FC<SolutionsProps> = ({
                     setIsProcessing={setDebugProcessing}
                     currentLanguage={currentLanguage}
                     setLanguage={setLanguage}
+                    currentTheme={currentTheme}
+                    setTheme={setTheme}
                 />
             ) : (
                 <div ref={contentRef} className="relative space-y-3 px-4 py-3">

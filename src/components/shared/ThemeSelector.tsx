@@ -14,7 +14,8 @@ export const  ThemeSelector: React.FC<ThemeSelectorProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const themes = [
-    { value: "light", label: "Default" },
+    { value: "default", label: "Default" },
+    { value: "light", label: "Light" },
     { value: "dark", label: "Dark" },
     { value: "special", label: "Special" },
   ];

@@ -9,7 +9,7 @@ export class ShortcutsHelper {
   }
 
   public registerGlobalShortcuts(): void {
-    globalShortcut.register("CommandOrControl+H", async () => {
+    globalShortcut.register("CommandOrControl+Space", async () => {
       const mainWindow = this.deps.getMainWindow()
       if (mainWindow) {
         console.log("Taking screenshot...")
@@ -75,7 +75,7 @@ export class ShortcutsHelper {
       this.deps.moveWindowUp()
     })
 
-    globalShortcut.register("CommandOrControl+B", () => {
+    globalShortcut.register("CommandOrControl+Tab", () => {
       this.deps.toggleMainWindow()
     })
 

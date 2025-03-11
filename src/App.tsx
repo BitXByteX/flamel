@@ -711,7 +711,7 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
                         {loading
                             ? "Loading..."
                             : !isInitialized
-                            ? "Initializing...If you see this screen for more than 10 seconds, please quit and restart the app."
+                            ? "Initializing...If you see this screen for more than 15 seconds, please quit and restart the app."
                             : credits === undefined
                             ? "Loading credits..."
                             : "Checking subscription..."}

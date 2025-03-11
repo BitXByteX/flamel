@@ -80,6 +80,14 @@ export default {
           "--cci-gradient": "linear-gradient(to top, rgba(71, 71, 73, 0.6), rgba(138, 121, 155,0.6), rgba(59, 27, 47,0.6))",
           "--cci-gradient-secondary": "linear-gradient(to top, rgba(71, 71, 73, 0.8), rgba(138, 121, 155,0.8), rgba(59, 27, 47,0.8))",
         },
+        ".light": {
+          "--cci-primary": "#FF5733",
+          "--cci-secondary": "#33FFBD",
+          "--cci-primary-hover": "#FF4500",
+          "--cci-gradient": "linear-gradient(to top, rgba(73, 73, 80, 0.6), rgba(54, 53, 53,0.6), rgba(42, 40, 41,0.6))",
+          "--cci-gradient-secondary": "linear-gradient(to top, rgba(58, 58, 58, 0.8), rgba(86, 86, 86,0.8), rgba(30, 30, 30,0.8))",
+        },
+
       });
     }),
   ],
