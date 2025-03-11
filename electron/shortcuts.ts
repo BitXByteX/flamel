@@ -1,99 +1,99 @@
-import { globalShortcut, app } from "electron"
-import { IShortcutsHelperDeps } from "./main"
+import { globalShortcut, app } from "electron";
+import { IShortcutsHelperDeps } from "./main";
 
 export class ShortcutsHelper {
-  private deps: IShortcutsHelperDeps
+  private deps: IShortcutsHelperDeps;
 
   constructor(deps: IShortcutsHelperDeps) {
-    this.deps = deps
+    this.deps = deps;
   }
 
   public registerGlobalShortcuts(): void {
-    globalShortcut.register("CommandOrControl+Space", async () => {
-      const mainWindow = this.deps.getMainWindow()
+    globalShortcut.register("CommandOrControl+H", async () => {
+      const mainWindow = this.deps.getMainWindow();
       if (mainWindow) {
-        console.log("Taking screenshot...")
+        console.log("Taking screenshot...");
         try {
-          const screenshotPath = await this.deps.takeScreenshot()
-          const preview = await this.deps.getImagePreview(screenshotPath)
+          const screenshotPath = await this.deps.takeScreenshot();
+          const preview = await this.deps.getImagePreview(screenshotPath);
           mainWindow.webContents.send("screenshot-taken", {
             path: screenshotPath,
-            preview
-          })
+            preview,
+          });
         } catch (error) {
-          console.error("Error capturing screenshot:", error)
+          console.error("Error capturing screenshot:", error);
         }
       }
-    })
+    });
 
     globalShortcut.register("CommandOrControl+Enter", async () => {
-      await this.deps.processingHelper?.processScreenshots()
-    })
+      await this.deps.processingHelper?.processScreenshots();
+    });
 
     globalShortcut.register("CommandOrControl+R", () => {
       console.log(
         "Command + R pressed. Canceling requests and resetting queues..."
-      )
+      );
 
       // Cancel ongoing API requests
-      this.deps.processingHelper?.cancelOngoingRequests()
+      this.deps.processingHelper?.cancelOngoingRequests();
 
       // Clear both screenshot queues
-      this.deps.clearQueues()
+      this.deps.clearQueues();
 
-      console.log("Cleared queues.")
+      console.log("Cleared queues.");
 
       // Update the view state to 'queue'
-      this.deps.setView("queue")
+      this.deps.setView("queue");
 
       // Notify renderer process to switch view to 'queue'
-      const mainWindow = this.deps.getMainWindow()
+      const mainWindow = this.deps.getMainWindow();
       if (mainWindow && !mainWindow.isDestroyed()) {
-        mainWindow.webContents.send("reset-view")
-        mainWindow.webContents.send("reset")
+        mainWindow.webContents.send("reset-view");
+        mainWindow.webContents.send("reset");
       }
-    })
+    });
 
     // New shortcuts for moving the window
     globalShortcut.register("CommandOrControl+Left", () => {
-      console.log("Command/Ctrl + Left pressed. Moving window left.")
-      this.deps.moveWindowLeft()
-    })
+      console.log("Command/Ctrl + Left pressed. Moving window left.");
+      this.deps.moveWindowLeft();
+    });
 
     globalShortcut.register("CommandOrControl+Right", () => {
-      console.log("Command/Ctrl + Right pressed. Moving window right.")
-      this.deps.moveWindowRight()
-    })
+      console.log("Command/Ctrl + Right pressed. Moving window right.");
+      this.deps.moveWindowRight();
+    });
 
     globalShortcut.register("CommandOrControl+Down", () => {
-      console.log("Command/Ctrl + down pressed. Moving window down.")
-      this.deps.moveWindowDown()
-    })
+      console.log("Command/Ctrl + down pressed. Moving window down.");
+      this.deps.moveWindowDown();
+    });
 
     globalShortcut.register("CommandOrControl+Up", () => {
-      console.log("Command/Ctrl + Up pressed. Moving window Up.")
-      this.deps.moveWindowUp()
-    })
+      console.log("Command/Ctrl + Up pressed. Moving window Up.");
+      this.deps.moveWindowUp();
+    });
 
-    globalShortcut.register("CommandOrControl+Tab", () => {
-      this.deps.toggleMainWindow()
-    })
+    globalShortcut.register("CommandOrControl+B", () => {
+      this.deps.toggleMainWindow();
+    });
 
     globalShortcut.register("CommandOrControl+[", () => {
-      this.deps.decreaseOpacity()
-    })
+      this.deps.decreaseOpacity();
+    });
 
     globalShortcut.register("CommandOrControl+]", () => {
-      this.deps.increaseOpacity()
-    })
+      this.deps.increaseOpacity();
+    });
 
     globalShortcut.register("CommandOrControl+Q", () => {
-      this.deps.quitApp()
-    })
+      this.deps.quitApp();
+    });
 
     // Unregister shortcuts when quitting
     app.on("will-quit", () => {
-      globalShortcut.unregisterAll()
-    })
+      globalShortcut.unregisterAll();
+    });
   }
 }
