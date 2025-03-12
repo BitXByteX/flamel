@@ -396,7 +396,7 @@ function AuthForm() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50">
+        <div className="min-h-screen bg-gray-50 rounded-lg">
             <div className="flex flex-col items-center justify-center min-h-screen px-4">
                 <AbsoluteBackDrop />
                 <div className="w-full max-w-md space-y-8 p-4 sm:p-8 ">
@@ -722,14 +722,14 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
             (subscriptionLoading || !isInitialized || credits === undefined))
     ) {
         return (
-            <div className="min-h-screen bg-black flex items-center justify-center">
+            <div className="min-h-screen bg-cciGradientPrimary flex items-center justify-center">
                 <div className="flex flex-col items-center gap-3">
                     <div className="w-6 h-6 border-2 border-white/20 border-t-white/80 rounded-full animate-spin"></div>
                     <p className="text-white/60 text-sm">
                         {loading
                             ? "Loading..."
                             : !isInitialized
-                            ? "Initializing...If you see this screen for more than 15 seconds, please quit and restart the app."
+                            ? "Initializing... If this screen stays for more than 15 seconds, please close and reopen the app."
                             : credits === undefined
                             ? "Loading credits..."
                             : "Checking subscription..."}

@@ -56,24 +56,95 @@ export default function SubscribePage({ user }: SubscribePageProps) {
   return (
     <div
       ref={containerRef}
-      className="h-[400px] w-[400px] bg-black flex items-center justify-center"
+      className="h-[400px] w-[400px] bg-cciGradientSolid flex items-center justify-center rounded-xl"
     >
       <div className="w-full px-6">
         <div className="text-center">
-          <h2 className="text-2xl font-bold text-white">
+          {/* <h2 className="text-2xl font-bold text-white">
             Welcome to Crack Coding Interview
-          </h2>
-          <p className="text-gray-400 text-sm mt-2 mb-6">
-            To continue using Crack Coding Interview, you'll need to subscribe
-            ($60/month)
+          </h2> */}
+          <div className="flex items-center z-10 justify-center">
+              <div
+                  className="flex items-center rounded-full shadow-sm px-4 py-2 "
+              >
+                  <img
+                      src="./logo-trans.png"
+                      height={32}
+                      width={32}
+                      alt="Crack Coding Interview"
+                      className="h-8 w-8 text-cciPrimary"
+                  />
+                  <span className="text-lg font-semibold ml-2 bg-cciGradient bg-clip-text text-transparent">
+                      Crack Coding Interview
+                  </span>
+              </div>
+          </div>
+          <p className="text-gray-200 text-sm mt-3 mb-6">
+            To continue using Crack Coding Interview, subscribe for
+            ($49/month)
           </p>
-          <p className="text-gray-500 text-[11px] -mt-4 mb-6 italic">
+          {/* <p className="text-gray-500 text-[11px] -mt-4 mb-6 italic">
             * Undetectability may not work with some versions of MacOS. See our
             help center for more details
+          </p> */}
+          <p className="text-gray-400 text-[11px] -mt-4 mb-6 italic">
+            Note: Undetectability may not be supported on certain MacOS versions. Visit our Help Center for more information.
           </p>
 
           {/* Keyboard Shortcuts */}
-          <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 mb-6">
+          {/* <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 mb-6">
+            <div className="flex items-center justify-between text-white/70 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="text-white/40">Toggle Visibility</span>
+                <div className="flex gap-1">
+                  <kbd className="bg-white/[0.07] border border-white/[0.1] rounded-md px-1.5 py-1 text-[10px] leading-none text-white/60">
+                    ⌘
+                  </kbd>
+                  <kbd className="bg-white/[0.07] border border-white/[0.1] rounded-md px-1.5 py-1 text-[10px] leading-none text-white/60">
+                    B
+                  </kbd>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-white/40">Quit App</span>
+                <div className="flex gap-1">
+                  <kbd className="bg-white/[0.07] border border-white/[0.1] rounded-md px-1.5 py-1 text-[10px] leading-none text-white/60">
+                    ⌘
+                  </kbd>
+                  <kbd className="bg-white/[0.07] border border-white/[0.1] rounded-md px-1.5 py-1 text-[10px] leading-none text-white/60">
+                    Q
+                  </kbd>
+                </div>
+              </div>
+            </div>
+          </div> */}
+
+          {/* Subscribe Button */}
+          <button
+            onClick={handleSubscribe}
+            className="w-full px-4 py-3 bg-cciBtnGradient border border-gray-400 text-white rounded-xl font-medium hover:bg-white/90 transition-colors flex items-center justify-center gap-2 mb-3"
+          >
+            Subscribe
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+              <polyline points="15 3 21 3 21 9" />
+              <line x1="10" y1="14" x2="21" y2="3" />
+            </svg>
+          </button>
+
+          <p className="text-gray-400 text-[11px] italic">Try some shortcuts</p>
+
+          <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 mb-5">
             <div className="flex items-center justify-between text-white/70 text-xs">
               <div className="flex items-center gap-2">
                 <span className="text-white/40">Toggle Visibility</span>
@@ -100,34 +171,11 @@ export default function SubscribePage({ user }: SubscribePageProps) {
             </div>
           </div>
 
-          {/* Subscribe Button */}
-          <button
-            onClick={handleSubscribe}
-            className="w-full px-4 py-3 bg-white text-black rounded-xl font-medium hover:bg-white/90 transition-colors flex items-center justify-center gap-2 mb-6"
-          >
-            Subscribe
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-              <polyline points="15 3 21 3 21 9" />
-              <line x1="10" y1="14" x2="21" y2="3" />
-            </svg>
-          </button>
-
           {/* Logout Section */}
           <div className="border-t border-white/[0.06] pt-4">
             <button
               onClick={handleSignOut}
-              className="flex items-center justify-center gap-1.5 text-[11px] text-red-400/80 hover:text-red-400 transition-colors w-full group"
+              className="flex items-center justify-center gap-1.5 text-[11px] text-red-400 hover:text-red-300 transition-colors w-full group"
             >
               <div className="w-3.5 h-3.5 flex items-center justify-center opacity-60 group-hover:opacity-100 transition-opacity">
                 <svg
