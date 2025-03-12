@@ -1,5 +1,5 @@
 .backdropBg {
-    background: url(../../../public/login_bg.svg) center 10px no-repeat;
+    background: url('/assets/login_bg.svg') center 10px no-repeat;
     background-size: cover;
     height: calc(100% - 17vh);
     left: 0;
@@ -14,7 +14,7 @@
     content: "";
     display: block;
     position: absolute;
-    background: url(../../../public/login-bg-dots.svg);
+    background: url('/assets/login-bg-dots.svg') center 10px no-repeat;
     height: 300%;
     left: -50%;
     top: -100%;
@@ -25,7 +25,7 @@
     content: "";
     display: block;
     position: absolute;
-    background: url(../../../public/login-bg-top.svg) center top no-repeat;
+    background: url('/assets/login-bg-top.svg') center top no-repeat;
     background-size: 100%;
     height: 100%;
     left: 0;
