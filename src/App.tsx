@@ -7,7 +7,7 @@ import {
     QueryClientProvider,
     useQueryClient,
 } from "@tanstack/react-query";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { User } from "@supabase/supabase-js";
 import {
     Toast,
@@ -264,6 +264,21 @@ function AuthForm() {
     const [shake, setShake] = useState(false);
     const [passwordError, setPasswordError] = useState("");
     const [isSignUp, setIsSignUp] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        // Update dimension for Auth form
+        const updateDimensions = () => {
+            if (containerRef.current) {
+                window.electronAPI.updateContentDimensions({
+                    width: 800, // Fixed width
+                    height: 600 // Fixed height
+                })
+            }
+        }
+
+        updateDimensions()
+    }, [])
 
     const validatePassword = (value: string) => {
         if (isSignUp && value.length < 6) {
@@ -396,7 +411,7 @@ function AuthForm() {
     };
 
     return (
-        <div className="min-h-screen bg-gray-50 rounded-lg">
+        <div className="min-h-screen bg-gray-50 rounded-lg"  ref={containerRef}>
             <div className="flex flex-col items-center justify-center min-h-screen px-4">
                 <AbsoluteBackDrop />
                 <div className="w-full max-w-md space-y-8 p-4 sm:p-8 ">
