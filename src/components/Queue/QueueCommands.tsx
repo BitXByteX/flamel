@@ -304,14 +304,14 @@ const TooltipMenuComponent: React.FC<any> = ({
                   className="underline cursor-pointer hover:opacity-80"
                   onClick={() => window.electronAPI.openSettingsPortal()}
                 >
-                  https://www.crackcodinginterview.com/settings
+                  https://www.crackcodinginterview.com/dashboard
                 </span>
               </div>
             </div>
 
             <button
               onClick={handleSignOut}
-              className="flex items-center gap-2 text-[11px] text-red-400 hover:text-red-300 transition-colors w-full"
+              className="flex items-center place-content-end pr-[10px] gap-2 text-[11px] text-red-400 hover:text-red-300 transition-colors w-full"
             >
               <div className="w-4 h-4 flex items-center justify-center">
                 <svg
@@ -906,7 +906,7 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
                 if (credits <= 0) {
                   showToast(
                     "Out of Credits",
-                    "You are out of credits. Please refill at https://www.crackcodinginterview.com/settings.",
+                    "You are out of credits. Please refill at https://www.crackcodinginterview.com/dashboard.",
                     "error"
                   );
                   return;
@@ -1282,7 +1282,7 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
                               window.electronAPI.openSettingsPortal()
                             }
                           >
-                            https://www.crackcodinginterview.com/settings
+                            https://www.crackcodinginterview.com/dashboard
                           </span>
                         </div>
                       </div>

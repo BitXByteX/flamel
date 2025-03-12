@@ -53,6 +53,7 @@ export default {
       backgroundImage: {
         cciGradientPrimary: "var(--cci-gradient)",
         cciGradientSecondary: "var(--cci-gradient-secondary)",
+        cciGradient: "linear-gradient(to right, #7262fb, #a855f7, #e34ca8)",
       },
     }
   },

@@ -17,6 +17,7 @@ import {
     ToastViewport,
 } from "./components/ui/toast";
 import { ToastContext } from "./contexts/toast";
+import AbsoluteBackDrop from "./components/ui/AbsoluteBackDrop/AbsoluteBackDrop";
 
 // Create a React Query client
 const queryClient = new QueryClient({
@@ -395,17 +396,34 @@ function AuthForm() {
     };
 
     return (
-        <div className="min-h-screen bg-black">
+        <div className="min-h-screen bg-gray-50">
             <div className="flex flex-col items-center justify-center min-h-screen px-4">
-                <div className="w-full max-w-md space-y-8 p-4 sm:p-8">
+                <AbsoluteBackDrop />
+                <div className="w-full max-w-md space-y-8 p-4 sm:p-8 ">
                     <div className="flex flex-col items-center justify-center space-y-6">
-                        <h2 className="text-2xl font-semibold text-white">
+                        {/* Logo Container */}
+                        <div className="flex items-center z-10">
+                            <div
+                                className="flex items-center bg-white rounded-full shadow-sm px-4 py-2 border border-gray-100"
+                            >
+                                <img
+                                    src="./logo-trans.png"
+                                    height={32}
+                                    width={32}
+                                    alt="Crack Coding Interview"
+                                    className="h-8 w-8 text-cciPrimary"
+                                />
+                                <span className="text-lg font-semibold ml-2 bg-cciGradient bg-clip-text text-transparent">
+                                    Crack Coding Interview
+                                </span>
+                            </div>
+                        </div>
+                        <h2 className="text-2xl font-semibold text-black z-10">
                             {isSignUp
                                 ? "Create your account"
-                                : "Log in to Crack Coding Interview"}
+                                : "Log in"}
                         </h2>
-
-                        <div className="w-full max-w-sm space-y-4">
+                        <div className="w-full max-w-sm space-y-4 z-[100]">
                             <button
                                 onClick={handleGoogleAuth}
                                 disabled={isLoading}
@@ -437,7 +455,7 @@ function AuthForm() {
                                     <div className="w-full border-t border-white/10"></div>
                                 </div>
                                 <div className="relative flex justify-center text-xs uppercase">
-                                    <span className="bg-black px-2 text-[#989898]">
+                                    <span className="px-2 font-semibold text-white rounded-lg">
                                         Or continue with email
                                     </span>
                                 </div>
@@ -455,7 +473,7 @@ function AuthForm() {
                                         onChange={(e) =>
                                             setEmail(e.target.value)
                                         }
-                                        className={`w-full px-4 py-3 text-white rounded-2xl border focus:outline-none text-sm font-medium placeholder:text-[#989898] placeholder:font-medium transition-colors frosted-glass ${
+                                        className={`w-full px-4 py-3 text-black rounded-2xl border focus:outline-none text-sm font-medium placeholder:text-[#989898] placeholder:font-medium transition-colors ${
                                             error
                                                 ? error ==
                                                   "Please check your email to confirm your account"
@@ -484,7 +502,7 @@ function AuthForm() {
                                         placeholder="Password"
                                         value={password}
                                         onChange={handlePasswordChange}
-                                        className={`w-full px-4 py-3 text-white rounded-2xl border focus:outline-none text-sm font-medium placeholder:text-[#989898] placeholder:font-medium transition-colors frosted-glass ${
+                                        className={`w-full px-4 py-3 text-black rounded-2xl border focus:outline-none text-sm font-medium placeholder:text-[#989898] placeholder:font-medium transition-colors ${
                                             passwordError
                                                 ? "border-red-500 focus:border-red-500"
                                                 : "border-white/10 focus:border-white/20"
@@ -492,7 +510,7 @@ function AuthForm() {
                                         required
                                     />
                                     {passwordError && (
-                                        <p className="text-sm text-red-500 px-1">
+                                        <p className="text-sm text-red-800 px-1">
                                             {passwordError}
                                         </p>
                                     )}
@@ -505,7 +523,7 @@ function AuthForm() {
                                         !password ||
                                         !!passwordError
                                     }
-                                    className="relative w-full px-4 py-3 rounded-2xl transition-all disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium auth-button"
+                                    className="relative bg-[#645BFB] hover:bg-[#6352f7] text-white w-full px-4 py-3 rounded-2xl transition-all disabled:opacity-90 disabled:cursor-not-allowed text-sm font-medium"
                                 >
                                     {isLoading
                                         ? isSignUp
@@ -521,7 +539,7 @@ function AuthForm() {
                                 onClick={toggleMode}
                                 className="block w-full border border-white/10 rounded-2xl p-4 hover:bg-[#1A1A1A] transition-colors group"
                             >
-                                <p className="text-center text-sm text-[#989898]">
+                                <p className="text-center text-sm text-white">
                                     {isSignUp
                                         ? "Already have an account? Sign in →"
                                         : "Don't have an account? Sign up →"}

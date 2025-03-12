@@ -157,7 +157,7 @@ export function initializeIpcHandlers(deps: IIpcHandlerDeps): void {
 
   // Subscription handlers
   ipcMain.handle("open-settings-portal", () => {
-    shell.openExternal("https://www.crackcodinginterview.com/settings")
+    shell.openExternal("https://www.crackcodinginterview.com/dashboard")
   })
   ipcMain.handle("open-subscription-portal", async (_event, authData) => {
     try {

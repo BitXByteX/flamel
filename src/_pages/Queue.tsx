@@ -121,7 +121,7 @@ const Queue: React.FC<QueueProps> = ({
             window.electronAPI.onOutOfCredits(() => {
                 showToast(
                     "Out of Credits",
-                    "You are out of credits. Please refill at https://www.crackcodinginterview.com/settings.",
+                    "You are out of credits. Please refill at https://www.crackcodinginterview.com/dashboard.",
                     "error"
                 );
             }),
