@@ -1,6 +1,6 @@
 {
     "name": "crack-coding-interview-deskapp",
-    "version": "1.0.18",
+    "version": "1.0.0",
     "main": "dist-electron/main.js",
     "scripts": {
         "clean": "rimraf dist dist-electron",
@@ -9,7 +9,7 @@
     },
     "build": {
         "appId": "com.bitxbytex.crackcodinginterview",
-        "productName": "Crack Coding Interview",
+        "productName": "CCI",
         "files": [
             "dist/**/*",
             "dist-electron/**/*",
@@ -89,15 +89,6 @@
                 "repo": "crack-coding-interview",
                 "private": false,
                 "releaseType": "release"
-            }
-        ],
-        "extraResources": [
-            {
-                "from": ".env",
-                "to": ".env",
-                "filter": [
-                    "**/*"
-                ]
             }
         ],
         "extraMetadata": {
