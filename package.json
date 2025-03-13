@@ -85,10 +85,11 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "ibttf",
-        "repo": "crack-coding-interview",
-        "private": false,
-        "releaseType": "release"
+        "owner": "cci-tool",
+        "repo": "cci-release",
+        "private": true,
+        "releaseType": "release",
+        "token": "process.env.GH_TOKEN"
       }
     ],
     "extraMetadata": {
