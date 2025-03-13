@@ -60,11 +60,11 @@ export const UpdateNotification: React.FC = () => {
   return (
     <Dialog open={true}>
       <DialogContent
-        className="bg-black/90 text-white border-white/20"
+        className="bg-black/95 text-white border-white/20 z-[100]"
         onPointerDownOutside={(e) => e.preventDefault()}
       >
         <div className="p-4">
-          <h2 className="text-lg font-semibold mb-4">
+          <h2 className="text-lg font-semibold mb-4 text-center">
             {updateDownloaded
               ? "Update Ready to Install"
               : "A New Version is Available"}
@@ -74,7 +74,7 @@ export const UpdateNotification: React.FC = () => {
               ? "The update has been downloaded and will be installed when you restart the app."
               : "A new version of Crack Coding Interview is available. Please update to continue using the app."}
           </p>
-          <div className="flex justify-end gap-2">
+          <div className="flex gap-2 justify-center">
             {updateDownloaded ? (
               <Button
                 variant="outline"
