@@ -11,6 +11,11 @@ export function initAutoUpdater() {
     return
   }
 
+  // if (!app.isPackaged) {
+  //   console.log("Forcing update check in development mode")
+  //   autoUpdater.forceDevUpdateConfig = true
+  // }
+  
   if (!process.env.GH_TOKEN) {
     console.error("GH_TOKEN environment variable is not set")
     return
@@ -29,6 +34,15 @@ export function initAutoUpdater() {
     "Auto-updater logger configured with level:",
     log.transports.file.level
   )
+
+  // Set custom update URL to point to a different repository or URL
+  autoUpdater.setFeedURL({
+    provider: 'github',
+    owner: 'cci-tool', // Replace with the target repo owner
+    repo: 'cci-release',   // Replace with the target repo name
+    releaseType: "release",
+    token: process.env.GH_TOKEN, // (Optional) GitHub token if repo is private
+  })
 
   // Log all update events
   autoUpdater.on("checking-for-update", () => {
