@@ -19,6 +19,8 @@ export const  LanguageSelector: React.FC<LanguageSelectorProps> = ({
     { value: "java", label: "Java" },
     { value: "golang", label: "Go" },
     { value: "cpp", label: "C++" },
+    { value: "csharp", label: "C#" },
+    { value: "rust", label: "Rust" },
     { value: "swift", label: "Swift" },
     { value: "kotlin", label: "Kotlin" },
     { value: "ruby", label: "Ruby" },
