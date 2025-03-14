@@ -9,15 +9,15 @@ export function initAutoUpdater() {
   console.log("Initializing auto-updater...");
 
   // Skip update checks in development
-  // if (!app.isPackaged) {
-  //   console.log("Skipping auto-updater in development mode");
-  //   return;
-  // }
-
   if (!app.isPackaged) {
-    console.log("Forcing update check in development mode");
-    autoUpdater.forceDevUpdateConfig = true;
+    console.log("Skipping auto-updater in development mode");
+    return;
   }
+
+  // if (!app.isPackaged) {
+  //   console.log("Forcing update check in development mode");
+  //   autoUpdater.forceDevUpdateConfig = true;
+  // }
 
   if (!process.env.GH_TOKEN) {
     console.error("GH_TOKEN environment variable is not set");
