@@ -3,6 +3,9 @@ import { BrowserWindow, ipcMain, app } from "electron"
 import log from "electron-log"
 
 export function initAutoUpdater() {
+  //UPDATE_CHECK_INTERVAL in hours
+  const UPDATE_CHECK_INTERVAL: number = 2;
+
   console.log("Initializing auto-updater...")
 
   // Skip update checks in development
@@ -101,7 +104,7 @@ export function initAutoUpdater() {
       .catch((err) => {
         console.error("Error checking for updates (interval):", err)
       })
-  }, 60 * 60 * 1000)
+  }, UPDATE_CHECK_INTERVAL * 60 * 60 * 1000)
 
   // Handle IPC messages from renderer
   ipcMain.handle("start-update", async () => {
