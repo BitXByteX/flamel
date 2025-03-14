@@ -92,6 +92,15 @@
         "token": "process.env.GH_TOKEN"
       }
     ],
+    "extraResources": [
+      {
+        "from": ".env",
+        "to": ".env",
+        "filter": [
+          "*/"
+        ]
+      }
+    ],
     "extraMetadata": {
       "main": "dist-electron/main.js"
     }
