@@ -510,12 +510,6 @@ const Solutions: React.FC<SolutionsProps> = ({
 
                                 {solutionData && (
                                     <>
-                                        <SolutionSection
-                                            title={`${COMMAND_KEY} + Arrow keys to move`}
-                                            content={solutionData}
-                                            isLoading={!solutionData}
-                                            currentLanguage={currentLanguage}
-                                        />
                                         <ContentSection
                                             title={`Explanation`}
                                             content={
@@ -547,6 +541,12 @@ const Solutions: React.FC<SolutionsProps> = ({
                                                 )
                                             }
                                             isLoading={!thoughtsData}
+                                        />
+                                        <SolutionSection
+                                            title={`${COMMAND_KEY} + Arrow keys to move`}
+                                            content={solutionData}
+                                            isLoading={!solutionData}
+                                            currentLanguage={currentLanguage}
                                         />
 
                                         <ComplexitySection
