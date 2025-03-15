@@ -553,7 +553,7 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
   const [isSubscribed, setIsSubscribed] = useState(false);
   const [credits, setCredits] = useState<number | undefined>(undefined);
   const [currentLanguage, setCurrentLanguage] = useState<string>("python");
-  const [currentTheme, setCurrentTheme] = useState<string>("light");
+  const [currentTheme, setCurrentTheme] = useState<string>("default");
   const queryClient = useQueryClient();
 
   // Check auth state on mount
