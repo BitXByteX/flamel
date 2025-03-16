@@ -79,9 +79,12 @@ export default function SubscribePage({ user }: SubscribePageProps) {
                   </span>
               </div>
           </div>
-          <p className="text-gray-200 text-sm mt-3 mb-6">
+          {/* <p className="text-gray-200 text-sm mt-3 mb-6">
             To continue using Crack Coding Interview, subscribe for
             ($49/month)
+          </p> */}
+          <p className="text-gray-200 text-sm mt-3 mb-6">
+            Keep cracking coding interviews! Get started with a one-time payment of just $30 for 25 credits — no subscription needed!
           </p>
           {/* <p className="text-gray-500 text-[11px] -mt-4 mb-6 italic">
             * Undetectability may not work with some versions of MacOS. See our
@@ -124,7 +127,8 @@ export default function SubscribePage({ user }: SubscribePageProps) {
             onClick={handleSubscribe}
             className="w-full px-4 py-3 bg-cciBtnGradient border border-gray-400 text-white rounded-xl font-medium hover:bg-white/90 transition-colors flex items-center justify-center gap-2 mb-3"
           >
-            Subscribe
+            {/* Subscribe */}
+            Purchase
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"

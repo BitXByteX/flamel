@@ -298,7 +298,7 @@ const TooltipMenuComponent: React.FC<any> = ({
                 <span>Credits Remaining</span>
                 <span>{credits}</span>
               </div>
-              <div className="text-[11px] text-white/50">
+              {/* <div className="text-[11px] text-white/50">
                 Refill at{" "}
                 <span
                   className="underline cursor-pointer hover:opacity-80"
@@ -306,7 +306,7 @@ const TooltipMenuComponent: React.FC<any> = ({
                 >
                   https://www.crackcodinginterview.com/dashboard
                 </span>
-              </div>
+              </div> */}
             </div>
 
             <button

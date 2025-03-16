@@ -231,7 +231,7 @@ function App() {
               setToastState((prev) => ({ ...prev, open }))
             }
             variant={toastState.variant}
-            duration={1500}
+            duration={2500}
           >
             <ToastTitle>{toastState.title}</ToastTitle>
             <ToastDescription>{toastState.description}</ToastDescription>
@@ -356,7 +356,7 @@ function AuthForm() {
   async function handleGoogleAuth() {
     setIsLoading(true);
     setError("");
-    console.log("isdev", import.meta.env.DEV);
+    // console.log("isdev", import.meta.env.DEV);
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
@@ -716,7 +716,8 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
               ? "Initializing... If this screen stays for more than 15 seconds, please close and reopen the app."
               : credits === undefined
               ? "Loading credits..."
-              : "Checking subscription..."}
+              // : "Checking subscription..."}
+              : "Verifying your payment..."}
           </p>
         </div>
       </div>

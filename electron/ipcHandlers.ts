@@ -178,7 +178,7 @@ export function initializeIpcHandlers(deps: IIpcHandlerDeps): void {
   });
   ipcMain.handle("open-subscription-portal", async (_event, authData) => {
     try {
-      const url = "https://www.crackcodinginterview.com/checkout";
+      const url = "https://www.crackcodinginterview.com/pricing";
       await shell.openExternal(url);
       return { success: true };
     } catch (error) {
