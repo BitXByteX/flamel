@@ -84,7 +84,7 @@ export default function SubscribePage({ user }: SubscribePageProps) {
             ($49/month)
           </p> */}
           <p className="text-gray-200 text-sm mt-3 mb-6">
-            Keep cracking coding interviews! Get started with a one-time payment of just $30 for 25 credits — no subscription needed!
+            Keep cracking coding interviews! Get started with a one-time payment of just $30 for 20 credits — no subscription needed!
           </p>
           {/* <p className="text-gray-500 text-[11px] -mt-4 mb-6 italic">
             * Undetectability may not work with some versions of MacOS. See our
