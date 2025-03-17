@@ -9,7 +9,7 @@ import { BrowserWindow } from "electron"
 const isDev = !app.isPackaged
 const API_BASE_URL = isDev
   ? "http://localhost:3000"
-  : "https://crack-coding-interview.vercel.app/"
+  : "https://crackcodinginterview.com/"
 
 export class ProcessingHelper {
   private deps: IProcessingHelperDeps
