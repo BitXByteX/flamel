@@ -8,9 +8,8 @@ import { BrowserWindow } from "electron";
 
 const isDev = !app.isPackaged;
 const API_BASE_URL = isDev
-  ? "https://crackcodinginterview.com/"
-  : // ? "http://localhost:3000"
-    "https://crackcodinginterview.com/";
+  ? "http://localhost:3000"
+  : "https://crackcodinginterview.com/";
 
 export class ProcessingHelper {
   private deps: IProcessingHelperDeps;
