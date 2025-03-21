@@ -11,6 +11,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import { User } from "@supabase/supabase-js";
 import {
   Toast,
+  TrialToast,
   ToastDescription,
   ToastProvider,
   ToastTitle,
@@ -45,11 +46,18 @@ function App() {
   const [credits, setCredits] = useState<number>(0);
   const [currentLanguage, setCurrentLanguage] = useState<string>("python");
   const [isInitialized, setIsInitialized] = useState(false);
+  const [showTrialToast, setShowTrialToast] = useState(false);
 
   // Helper function to safely update credits
   const updateCredits = useCallback((newCredits: number) => {
     setCredits(newCredits);
     window.__CREDITS__ = newCredits;
+  }, []);
+
+  // Helper function to safely update trial toast
+  const toggleTrialToast = useCallback((isTrail: boolean) => {
+    setShowTrialToast(isTrail);
+    window.__PROTECTION__ = !isTrail;
   }, []);
 
   // Helper function to safely update language
@@ -115,6 +123,56 @@ function App() {
     }
   }, []);
 
+  const isTrialModeHandleScreenCaptureProtection = (isTrialMode: any) => {
+    (async () => {
+      toggleTrialToast(isTrialMode);
+      if (isTrialMode) {
+        // Disable protection in trial mode
+        try {
+          const result = await window.electronAPI.setScreenCaptureProtection(
+            false
+          );
+
+          if (!result.success) {
+            console.error(
+              "Failed to update setScreenCaptureProtection",
+              result.error
+            );
+          } else {
+            console.log(
+              "update setScreenCaptureProtection success",
+              result.success
+            );
+            window.__PROTECTION__ = false;
+          }
+        } catch (error) {
+          console.error("Failed to update setScreenCaptureProtection", error);
+        }
+      } else {
+        // Enable protection in non-trial mode
+        try {
+          const result = await window.electronAPI.setScreenCaptureProtection(
+            true
+          );
+          if (!result.success) {
+            console.error(
+              "Failed to update setScreenCaptureProtection",
+              result.error
+            );
+          } else {
+            console.log(
+              "update setScreenCaptureProtection success",
+              result.error
+            );
+            window.__PROTECTION__ = true;
+          }
+        } catch (error) {
+          console.error("Failed to update setScreenCaptureProtection", error);
+        }
+      }
+    })();
+  };
+
   // Handle credits initialization and updates
   useEffect(() => {
     const initializeAndSubscribe = async () => {
@@ -131,10 +189,14 @@ function App() {
       // Initial fetch
       const { data: subscription } = await supabase
         .from("subscriptions")
-        .select("credits, preferred_language")
+        .select("credits, preferred_language, is_trial, trial_status")
         .eq("user_id", user.id)
         .single();
 
+      let isTrialMode = Boolean(
+        subscription?.is_trial && subscription?.trial_status == "ACTIVE"
+      );
+      isTrialModeHandleScreenCaptureProtection(isTrialMode);
       // Set defaults if no subscription
       updateCredits(subscription?.credits ?? 1);
       updateLanguage(subscription?.preferred_language ?? "python");
@@ -153,7 +215,30 @@ function App() {
           },
           (payload) => {
             const newCredits = payload.new.credits;
+            isTrialMode = Boolean(
+              payload.new?.is_trial && payload.new.trial_status == "ACTIVE"
+            );
             updateCredits(newCredits);
+            toggleTrialToast(isTrialMode);
+            isTrialModeHandleScreenCaptureProtection(isTrialMode);
+          }
+        )
+        .on(
+          "postgres_changes",
+          {
+            event: "INSERT",
+            schema: "public",
+            table: "subscriptions",
+            filter: `user_id=eq.${user.id}`,
+          },
+          (payload) => {
+            const newCredits = payload.new.credits;
+            isTrialMode = Boolean(
+              payload.new?.is_trial && payload.new.trial_status == "ACTIVE"
+            );
+            updateCredits(newCredits);
+            toggleTrialToast(isTrialMode);
+            isTrialModeHandleScreenCaptureProtection(isTrialMode);
           }
         )
         .subscribe();
@@ -223,8 +308,19 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ToastProvider>
         <ToastContext.Provider value={{ showToast }}>
-          <AppContent isInitialized={isInitialized} />
+          <AppContent
+            isInitialized={isInitialized}
+            showTrialToast={showTrialToast}
+            isTrialModeHandleScreenCaptureProtection={
+              isTrialModeHandleScreenCaptureProtection
+            }
+          />
           <UpdateNotification />
+          <TrialToast
+            open={showTrialToast}
+            variant={toastState.variant}
+            duration={Infinity}
+          ></TrialToast>
           <Toast
             open={toastState.open}
             onOpenChange={(open) =>
@@ -546,7 +642,15 @@ function AuthForm() {
 }
 
 // Main App component that handles conditional rendering based on auth and subscription state
-function AppContent({ isInitialized }: { isInitialized: boolean }) {
+function AppContent({
+  isInitialized,
+  isTrialModeHandleScreenCaptureProtection,
+  showTrialToast,
+}: {
+  isInitialized: boolean;
+  isTrialModeHandleScreenCaptureProtection: any;
+  showTrialToast: any;
+}) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [subscriptionLoading, setSubscriptionLoading] = useState(false);
@@ -595,6 +699,10 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
 
   // Check subscription and credits status whenever user changes
   useEffect(() => {
+    if (!user && showTrialToast) {
+      // User not logged in, disable trial toast msg and enabling protection
+      isTrialModeHandleScreenCaptureProtection(false);
+    }
     const checkSubscriptionAndCredits = async () => {
       if (!user?.id) {
         setIsSubscribed(false);
@@ -610,6 +718,11 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
           .select("*, credits, preferred_language")
           .eq("user_id", user.id)
           .maybeSingle();
+
+        let isTrialMode = Boolean(
+          subscription?.is_trial && subscription?.trial_status == "ACTIVE"
+        );
+        isTrialModeHandleScreenCaptureProtection(isTrialMode);
 
         setIsSubscribed(!!subscription);
         setCredits(subscription?.credits ?? 0);
@@ -638,12 +751,17 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
           table: "subscriptions",
           filter: user?.id ? `user_id=eq.${user.id}` : undefined,
         },
-        async (payload) => {
+        async (payload: any) => {
           console.log("Subscription/credits event received:", {
             eventType: payload.eventType,
             old: payload.old,
             new: payload.new,
           });
+
+          let isTrialMode = Boolean(
+            payload?.new?.is_trial && payload?.new?.trial_status == "ACTIVE"
+          );
+          isTrialModeHandleScreenCaptureProtection(isTrialMode);
 
           // For any subscription event, check current subscription status
           if (
@@ -716,8 +834,8 @@ function AppContent({ isInitialized }: { isInitialized: boolean }) {
               ? "Initializing... If this screen stays for more than 15 seconds, please close and reopen the app."
               : credits === undefined
               ? "Loading credits..."
-              // : "Checking subscription..."}
-              : "Verifying your payment..."}
+              : // : "Checking subscription..."}
+                "Verifying your payment..."}
           </p>
         </div>
       </div>

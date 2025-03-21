@@ -47,6 +47,7 @@ interface ElectronAPI {
   decreaseOpacity: () => Promise<{ success: boolean; error?: string }>
   increaseOpacity: () => Promise<{ success: boolean; error?: string }>
   quitApp: () => Promise<{ success: boolean; error?: string }>
+  setScreenCaptureProtection: () => Promise<{ success: boolean; error?: string }>
   toggleMainWindow: () => Promise<{ success: boolean; error?: string }>
   triggerScreenshot: () => Promise<{ success: boolean; error?: string }>
   triggerProcessScreenshots: () => Promise<{ success: boolean; error?: string }>
@@ -76,4 +77,5 @@ interface Window {
   __LANGUAGE__: string
   __IS_INITIALIZED__: boolean
   __AUTH_TOKEN__: string
+  __PROTECTION__: boolean
 }

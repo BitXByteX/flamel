@@ -75,6 +75,26 @@ const Toast = React.forwardRef<
 ))
 Toast.displayName = ToastPrimitive.Root.displayName
 
+const TrialToast = React.forwardRef<
+  React.ElementRef<typeof ToastPrimitive.Root>,
+  ToastProps
+>(({ className, variant = "neutral", ...props }, ref) => (
+  <ToastPrimitive.Root
+    ref={ref}
+    duration={4000}
+    className={cn(
+      "group pointer-events-auto relative flex items-center space-x-2 overflow-hidden rounded-md p-2 w-[300px] bg-black text-white",
+      className
+    )}
+    {...props}
+  >
+    {toastVariants[variant].icon}
+    <p className="text-sm">Invisible protection disabled on trial mode</p>
+    <div className="flex-1">{props.children}</div>
+  </ToastPrimitive.Root>
+))
+TrialToast.displayName = ToastPrimitive.Root.displayName
+
 const ToastAction = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Action>,
   React.ComponentPropsWithoutRef<typeof ToastPrimitive.Action>
@@ -119,6 +139,7 @@ export {
   ToastProvider,
   ToastViewport,
   Toast,
+  TrialToast,
   ToastAction,
   ToastTitle,
   ToastDescription

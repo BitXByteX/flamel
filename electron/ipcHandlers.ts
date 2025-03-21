@@ -234,6 +234,18 @@ export function initializeIpcHandlers(deps: IIpcHandlerDeps): void {
     }
   });
 
+  ipcMain.handle(
+    "capture-protection",
+    async (event, enableProtection: boolean) => {
+      try {
+        deps.setScreenCaptureProtection(enableProtection);
+        return { success: true };
+      } catch (error) {
+        return { error: "Failed to toggle window" };
+      }
+    }
+  );
+
   ipcMain.handle("reset-queues", async () => {
     try {
       deps.clearQueues();

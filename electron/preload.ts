@@ -39,6 +39,9 @@ interface ElectronAPI {
   decreaseOpacity: () => Promise<{ success: boolean; error?: string }>;
   increaseOpacity: () => Promise<{ success: boolean; error?: string }>;
   quitApp: () => Promise<{ success: boolean; error?: string }>;
+  setScreenCaptureProtection: (
+    enableProtection: boolean
+  ) => Promise<{ success: boolean; error?: string }>;
   triggerScreenshot: () => Promise<{ success: boolean; error?: string }>;
   triggerProcessScreenshots: () => Promise<{
     success: boolean;
@@ -217,6 +220,8 @@ const electronAPI = {
   decreaseOpacity: () => ipcRenderer.invoke("decrease-opacity"),
   increaseOpacity: () => ipcRenderer.invoke("increase-opacity"),
   quitApp: () => ipcRenderer.invoke("quit-app"),
+  setScreenCaptureProtection: (enableProtection: boolean) =>
+    ipcRenderer.invoke("capture-protection", enableProtection),
   triggerMoveLeft: () => ipcRenderer.invoke("trigger-move-left"),
   triggerMoveRight: () => ipcRenderer.invoke("trigger-move-right"),
   triggerMoveUp: () => ipcRenderer.invoke("trigger-move-up"),
