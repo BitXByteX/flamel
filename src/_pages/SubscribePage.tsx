@@ -1,57 +1,57 @@
-import { useState, useRef, useEffect } from "react"
-import { supabase } from "../lib/supabase"
-import { User } from "@supabase/supabase-js"
+import { useState, useRef, useEffect } from "react";
+import { supabase } from "../lib/supabase";
+import { User } from "@supabase/supabase-js";
 
 interface SubscribePageProps {
-  user: User
+  user: User;
 }
 
 export default function SubscribePage({ user }: SubscribePageProps) {
-  const [error, setError] = useState<string | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const [error, setError] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateDimensions = () => {
       if (containerRef.current) {
         window.electronAPI.updateContentDimensions({
           width: 400, // Fixed width
-          height: 400 // Fixed height
-        })
+          height: 400, // Fixed height
+        });
       }
-    }
+    };
 
-    updateDimensions()
-  }, [])
+    updateDimensions();
+  }, []);
 
   const handleSignOut = async () => {
     try {
-      const { error: signOutError } = await supabase.auth.signOut()
-      if (signOutError) throw signOutError
+      const { error: signOutError } = await supabase.auth.signOut();
+      if (signOutError) throw signOutError;
     } catch (err) {
-      console.error("Error signing out:", err)
-      setError("Failed to sign out. Please try again.")
-      setTimeout(() => setError(null), 3000)
+      console.error("Error signing out:", err);
+      setError("Failed to sign out. Please try again.");
+      setTimeout(() => setError(null), 3000);
     }
-  }
+  };
 
   const handleSubscribe = async () => {
-    if (!user) return
+    if (!user) return;
 
     try {
       const result = await window.electronAPI.openSubscriptionPortal({
         id: user.id,
-        email: user.email!
-      })
+        email: user.email!,
+      });
 
       if (!result.success) {
-        throw new Error(result.error || "Failed to open subscription portal")
+        throw new Error(result.error || "Failed to open subscription portal");
       }
     } catch (err) {
-      console.error("Error opening subscription portal:", err)
-      setError("Failed to open subscription portal. Please try again.")
-      setTimeout(() => setError(null), 3000)
+      console.error("Error opening subscription portal:", err);
+      setError("Failed to open subscription portal. Please try again.");
+      setTimeout(() => setError(null), 3000);
     }
-  }
+  };
 
   return (
     <div
@@ -64,34 +64,34 @@ export default function SubscribePage({ user }: SubscribePageProps) {
             Welcome to Crack Coding Interview
           </h2> */}
           <div className="flex items-center z-10 justify-center">
-              <div
-                  className="flex items-center rounded-full shadow-sm px-4 py-2 "
-              >
-                  <img
-                      src="./logo-trans.png"
-                      height={32}
-                      width={32}
-                      alt="Crack Coding Interview"
-                      className="h-8 w-8 text-cciPrimary"
-                  />
-                  <span className="text-lg font-semibold ml-2 bg-cciGradient bg-clip-text text-transparent">
-                      Crack Coding Interview
-                  </span>
-              </div>
+            <div className="flex items-center rounded-full shadow-sm px-4 py-2 ">
+              <img
+                src="./logo-trans.png"
+                height={32}
+                width={32}
+                alt="Crack Coding Interview"
+                className="h-8 w-8 text-cciPrimary"
+              />
+              <span className="text-lg font-semibold ml-2 bg-cciGradient bg-clip-text text-transparent">
+                Crack Coding Interview
+              </span>
+            </div>
           </div>
           {/* <p className="text-gray-200 text-sm mt-3 mb-6">
             To continue using Crack Coding Interview, subscribe for
             ($49/month)
           </p> */}
           <p className="text-gray-200 text-sm mt-3 mb-6">
-            Keep cracking coding interviews! Get started with a one-time payment of just $30 for 20 credits — no subscription needed!
+            Keep cracking coding interviews! Get started with a one-time payment
+            — no subscription required!
           </p>
           {/* <p className="text-gray-500 text-[11px] -mt-4 mb-6 italic">
             * Undetectability may not work with some versions of MacOS. See our
             help center for more details
           </p> */}
           <p className="text-gray-400 text-[11px] -mt-4 mb-6 italic">
-            Note: Undetectability may not be supported on certain MacOS versions. Visit our Help Center for more information.
+            Note: Undetectability may not be supported on certain MacOS
+            versions. Visit our Help Center for more information.
           </p>
 
           {/* Keyboard Shortcuts */}
@@ -209,5 +209,5 @@ export default function SubscribePage({ user }: SubscribePageProps) {
         </div>
       </div>
     </div>
-  )
+  );
 }
