@@ -599,7 +599,7 @@ function AuthForm() {
                 <button
                   type="submit"
                   disabled={isLoading || !email || !password || !!passwordError}
-                  className="relative bg-[#645BFB] hover:bg-[#6352f7] text-white w-full px-4 py-3 rounded-2xl transition-all disabled:opacity-90 disabled:cursor-not-allowed text-sm font-medium"
+                  className="relative bg-[#645BFB] hover:bg-[#5c4afa] border border-[#a7a7a7] text-white w-full px-4 py-3 rounded-2xl transition-all disabled:opacity-90 disabled:cursor-not-allowed text-sm font-medium"
                 >
                   {isLoading
                     ? isSignUp
