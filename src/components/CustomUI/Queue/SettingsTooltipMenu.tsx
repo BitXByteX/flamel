@@ -31,7 +31,8 @@ const SettingsTooltipMenu: React.FC<any> = ({
   return (
     <div
       ref={tooltipRef}
-      className="text-left absolute top-8 left-[125px] mt-2 w-80 transform -translate-x-[calc(50%-12px)]"
+      // className="text-left absolute top-8 left-[125px] mt-2 w-80 transform -translate-x-[calc(50%-12px)]"
+      className="text-left absolute bottom-[-288px] left-[185px] mt-2 w-80 transform -translate-x-[calc(50%-12px)]"
       style={{ zIndex: 100 }}
     >
       {/* Add transparent bridge */}
@@ -193,8 +194,8 @@ const SettingsTooltipMenu: React.FC<any> = ({
 
             {/* Solve Command */}
             <div
-              className={`cursor-default rounded px-2 py-1.5 hover:bg-white/10 transition-colors ${
-                screenshotCount > 0 ? "" : "opacity-50 cursor-not-allowed"
+              className={`cursor-default rounded px-2 py-1.5 transition-colors ${
+                screenshotCount > 0 ? "hover:bg-white/10" : "opacity-50"
               }`}
               onClick={async () => {
                 if (screenshotCount === 0) return;
@@ -240,8 +241,8 @@ const SettingsTooltipMenu: React.FC<any> = ({
 
           {/* Start Over - Always visible */}
           <div
-            className={`cursor-default rounded px-2 py-1.5 hover:bg-white/10 transition-colors ${
-              screenshotCount > 0 ? "" : "opacity-50 cursor-not-allowed"
+            className={`cursor-default rounded px-2 py-1.5 transition-colors ${
+              screenshotCount > 0 ? "hover:bg-white/10" : "opacity-50"
             }`}
             onClick={async () => {
               try {

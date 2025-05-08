@@ -4,7 +4,8 @@ import CloseIconComponent from "../CloseIconComponent";
 
 export const ElegantDesign: React.FC<any> = ({
   showToast,
-  screenshotCount = 0,
+  isProcessing,
+  extraScreenshots,
   handleMouseEnter,
   handleMouseLeave,
   handleToggleSettings,
@@ -23,20 +24,25 @@ export const ElegantDesign: React.FC<any> = ({
       <div className="relative bg-white/10 bg-cciGradientPrimary backdrop-blur-md border border-white/20 rounded-2xl p-6 px-4 py-6 w-80 shadow-xl">
         {/* Side Buttons */}
         <div className="flex flex-col gap-3 items-center text-center">
-          {/* Take Screenshot opacity */}
+          {/* Take Screenshot */}
           <div className="flex flex-col items-center">
             <button
               className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white shadow-md cursor-default hover:bg-white/25"
               onClick={async () => {
-                try {
-                  const result = await window.electronAPI.triggerScreenshot();
-                  if (!result.success) {
-                    console.error("Failed to take screenshot:", result.error);
+                {
+                  /* Screenshot and Debug commands - Only show if not processing */
+                }
+                if (!isProcessing) {
+                  try {
+                    const result = await window.electronAPI.triggerScreenshot();
+                    if (!result.success) {
+                      console.error("Failed to take screenshot:", result.error);
+                      showToast("Error", "Failed to take screenshot", "error");
+                    }
+                  } catch (error) {
+                    console.error("Error taking screenshot:", error);
                     showToast("Error", "Failed to take screenshot", "error");
                   }
-                } catch (error) {
-                  console.error("Error taking screenshot:", error);
-                  showToast("Error", "Failed to take screenshot", "error");
                 }
               }}
             >
@@ -70,16 +76,12 @@ export const ElegantDesign: React.FC<any> = ({
               </svg>
             </button>
             <p className="text-white text-xs font-light mt-1 leading-3">
-              {screenshotCount === 0
-                ? "Take screenshot"
-                : screenshotCount === 1
-                ? "Take second screenshot"
-                : "Reset first screenshot"}
+              Take screenshot
             </p>
           </div>
 
-          {/* Solve */}
-          {screenshotCount > 0 ? (
+          {/* Screenshot and Debug commands - Only show if not processing */}
+          {extraScreenshots.length > 0 && !isProcessing ? (
             <div className="flex flex-col items-center">
               <button
                 className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white shadow-md cursor-default hover:bg-white/25 animate-pulse"
@@ -133,7 +135,7 @@ export const ElegantDesign: React.FC<any> = ({
                   ></g>
                   <g id="SVGRepo_iconCarrier">
                     {" "}
-                    <title>ai</title>{" "}
+                    <title>AI</title>{" "}
                     <g
                       id="Page-1"
                       stroke="none"
@@ -160,7 +162,7 @@ export const ElegantDesign: React.FC<any> = ({
                 </svg>
               </button>
               <p className="text-white text-xs font-light mt-1 leading-3">
-                Solve
+                Debug
               </p>
               {/* <div className="flex gap-1 ml-2">
                 <button className="bg-white/10 rounded-md px-1.5 py-1 text-[11px] leading-none text-white/70">
@@ -172,6 +174,58 @@ export const ElegantDesign: React.FC<any> = ({
               </div> */}
             </div>
           ) : null}
+
+          {/* Reset */}
+          <div className="flex flex-col items-center">
+            <button
+              className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center text-white shadow-md cursor-default hover:bg-white/25"
+              onClick={async () => {
+                try {
+                  const result = await window.electronAPI.triggerReset();
+                  if (!result.success) {
+                    console.error("Failed to reset:", result.error);
+                    showToast("Error", "Failed to reset", "error");
+                  }
+                } catch (error) {
+                  console.error("Error resetting:", error);
+                  showToast("Error", "Failed to reset", "error");
+                }
+              }}
+            >
+              <svg
+                width="30px"
+                height="30px"
+                viewBox="0 0 21 21"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="#ffffff"
+                stroke="#ffffff"
+                stroke-width="1.05"
+              >
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g
+                  id="SVGRepo_tracerCarrier"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></g>
+                <g id="SVGRepo_iconCarrier">
+                  {" "}
+                  <g
+                    fill="none"
+                    fill-rule="evenodd"
+                    stroke="#ffffff"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    transform="matrix(0 1 1 0 2.5 2.5)"
+                  >
+                    {" "}
+                    <path d="m3.98652376 1.07807068c-2.38377179 1.38514556-3.98652376 3.96636605-3.98652376 6.92192932 0 4.418278 3.581722 8 8 8s8-3.581722 8-8-3.581722-8-8-8"></path>{" "}
+                    <path d="m4 1v4h-4" transform="matrix(1 0 0 -1 0 6)"></path>{" "}
+                  </g>{" "}
+                </g>
+              </svg>
+            </button>
+            <p className="text-white text-xs font-light mt-1">Start over</p>
+          </div>
 
           {/* Increase opacity */}
           <div className="flex flex-col items-center">
@@ -497,7 +551,7 @@ export const ElegantDesign: React.FC<any> = ({
             {(isTooltipVisible || stayTooltipVisible) && (
               <SettingsTooltipMenu
                 showToast={showToast}
-                screenshotCount={screenshotCount}
+                extraScreenshots={extraScreenshots}
                 currentLanguage={currentLanguage}
                 setLanguage={setLanguage}
                 currentTheme={currentTheme}
@@ -506,6 +560,7 @@ export const ElegantDesign: React.FC<any> = ({
                 handleSignOut={handleSignOut}
                 onTooltipVisibilityChange={onTooltipVisibilityChange}
                 isTooltipVisible={isTooltipVisible}
+                isProcessing={isProcessing}
               />
             )}
           </div>

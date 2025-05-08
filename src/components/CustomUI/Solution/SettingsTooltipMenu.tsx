@@ -32,7 +32,7 @@ const SettingsTooltipMenu: React.FC<any> = ({
   return (
     <div
       ref={tooltipRef}
-      className="text-left absolute top-8 left-[125px] mt-2 w-80 transform -translate-x-[calc(50%-12px)]"
+      className="text-left absolute bottom-[-288px] left-[185px] mt-2 w-80 transform -translate-x-[calc(50%-12px)]"
       style={{ zIndex: 100 }}
     >
       {/* Add transparent bridge */}

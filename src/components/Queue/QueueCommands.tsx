@@ -5,8 +5,8 @@ import { useToast } from "../../contexts/toast";
 import { LanguageSelector } from "../shared/LanguageSelector";
 import { COMMAND_KEY } from "../../utils/platform";
 import { ThemeSelector } from "../shared/ThemeSelector";
-import BigEyeDesign from "../CustomUI/Queue/BigEyeDesign";
-// import ElegantDesign from "../CustomUI/Queue/ElegantDesign";
+// import BigEyeDesign from "../CustomUI/Queue/BigEyeDesign";
+import ElegantDesign from "../CustomUI/Queue/ElegantDesign";
 interface QueueCommandsProps {
   onTooltipVisibilityChange: (visible: boolean, height: number) => void;
   screenshotCount?: number;
@@ -108,23 +108,7 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
   return (
     <div>
       <div className="w-fit">
-        <BigEyeDesign
-          showToast={showToast}
-          screenshotCount={screenshotCount}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}
-          handleToggleSettings={handleToggleSettings}
-          isTooltipVisible={isTooltipVisible}
-          stayTooltipVisible={stayTooltipVisible}
-          credits={credits}
-          currentLanguage={currentLanguage}
-          setLanguage={setLanguage}
-          currentTheme={currentTheme}
-          setTheme={setTheme}
-          onTooltipVisibilityChange={onTooltipVisibilityChange}
-          handleSignOut={handleSignOut}
-        />
-        {/* <ElegantDesign
+        {/* <BigEyeDesign
           showToast={showToast}
           screenshotCount={screenshotCount}
           handleMouseEnter={handleMouseEnter}
@@ -140,6 +124,22 @@ const QueueCommands: React.FC<QueueCommandsProps> = ({
           onTooltipVisibilityChange={onTooltipVisibilityChange}
           handleSignOut={handleSignOut}
         /> */}
+        <ElegantDesign
+          showToast={showToast}
+          screenshotCount={screenshotCount}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+          handleToggleSettings={handleToggleSettings}
+          isTooltipVisible={isTooltipVisible}
+          stayTooltipVisible={stayTooltipVisible}
+          credits={credits}
+          currentLanguage={currentLanguage}
+          setLanguage={setLanguage}
+          currentTheme={currentTheme}
+          setTheme={setTheme}
+          onTooltipVisibilityChange={onTooltipVisibilityChange}
+          handleSignOut={handleSignOut}
+        />
       </div>
     </div>
   );

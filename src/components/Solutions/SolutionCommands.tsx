@@ -5,7 +5,8 @@ import { supabase } from "../../lib/supabase";
 import { LanguageSelector } from "../shared/LanguageSelector";
 import { COMMAND_KEY } from "../../utils/platform";
 import { ThemeSelector } from "../shared/ThemeSelector";
-import BigEyeDesign from "../CustomUI/Solution/BigEyeDesign";
+// import BigEyeDesign from "../CustomUI/Solution/BigEyeDesign";
+import ElegantDesign from "../CustomUI/Solution/ElegantDesign";
 export interface SolutionCommandsProps {
   onTooltipVisibilityChange: (visible: boolean, height: number) => void;
   isProcessing: boolean;
@@ -72,7 +73,24 @@ const SolutionCommands: React.FC<SolutionCommandsProps> = ({
   return (
     <div>
       <div className="w-fit">
-        <BigEyeDesign
+        {/* <BigEyeDesign
+          showToast={showToast}
+          isProcessing={isProcessing}
+          extraScreenshots={extraScreenshots}
+          handleMouseEnter={handleMouseEnter}
+          handleMouseLeave={handleMouseLeave}
+          handleToggleSettings={handleToggleSettings}
+          isTooltipVisible={isTooltipVisible}
+          stayTooltipVisible={stayTooltipVisible}
+          credits={credits}
+          currentLanguage={currentLanguage}
+          setLanguage={setLanguage}
+          currentTheme={currentTheme}
+          setTheme={setTheme}
+          onTooltipVisibilityChange={onTooltipVisibilityChange}
+          handleSignOut={handleSignOut}
+        /> */}
+        <ElegantDesign
           showToast={showToast}
           isProcessing={isProcessing}
           extraScreenshots={extraScreenshots}
