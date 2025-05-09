@@ -1,15 +1,15 @@
-import * as React from "react"
-import * as ToastPrimitive from "@radix-ui/react-toast"
-import { cn } from "../../lib/utils"
-import { AlertCircle, CheckCircle2, Info, X } from "lucide-react"
+import * as React from "react";
+import * as ToastPrimitive from "@radix-ui/react-toast";
+import { cn } from "../../lib/utils";
+import { AlertCircle, CheckCircle2, Info, X } from "lucide-react";
 
-const ToastProvider = ToastPrimitive.Provider
+const ToastProvider = ToastPrimitive.Provider;
 
 export type ToastMessage = {
-  title: string
-  description: string
-  variant: ToastVariant
-}
+  title: string;
+  description: string;
+  variant: ToastVariant;
+};
 
 const ToastViewport = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Viewport>,
@@ -23,15 +23,15 @@ const ToastViewport = React.forwardRef<
     )}
     {...props}
   />
-))
-ToastViewport.displayName = ToastPrimitive.Viewport.displayName
+));
+ToastViewport.displayName = ToastPrimitive.Viewport.displayName;
 
-type ToastVariant = "neutral" | "success" | "error"
+type ToastVariant = "neutral" | "success" | "error";
 
 interface ToastProps
   extends React.ComponentPropsWithoutRef<typeof ToastPrimitive.Root> {
-  variant?: ToastVariant
-  swipeDirection?: "right" | "left" | "up" | "down"
+  variant?: ToastVariant;
+  swipeDirection?: "right" | "left" | "up" | "down";
 }
 
 const toastVariants: Record<
@@ -40,17 +40,17 @@ const toastVariants: Record<
 > = {
   neutral: {
     icon: <Info className="h-3 w-3 text-amber-700" />,
-    bgColor: "bg-amber-100"
+    bgColor: "bg-amber-100",
   },
   success: {
     icon: <CheckCircle2 className="h-3 w-3 text-emerald-700" />,
-    bgColor: "bg-emerald-100"
+    bgColor: "bg-emerald-100",
   },
   error: {
     icon: <AlertCircle className="h-3 w-3 text-red-700" />,
-    bgColor: "bg-red-100"
-  }
-}
+    bgColor: "bg-red-100",
+  },
+};
 
 const Toast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Root>,
@@ -72,8 +72,8 @@ const Toast = React.forwardRef<
       <X className="h-2 w-2" />
     </ToastPrimitive.Close>
   </ToastPrimitive.Root>
-))
-Toast.displayName = ToastPrimitive.Root.displayName
+));
+Toast.displayName = ToastPrimitive.Root.displayName;
 
 const TrialToast = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Root>,
@@ -83,7 +83,7 @@ const TrialToast = React.forwardRef<
     ref={ref}
     duration={4000}
     className={cn(
-      "group pointer-events-auto relative flex items-center space-x-2 overflow-hidden rounded-md p-2 w-[300px] bg-black text-white",
+      "group pointer-events-auto relative flex items-center space-x-2 overflow-hidden rounded-md p-2 w-[300px] bg-black text-white h-[30px]",
       className
     )}
     {...props}
@@ -92,8 +92,8 @@ const TrialToast = React.forwardRef<
     <p className="text-sm">Invisible protection disabled on trial mode</p>
     <div className="flex-1">{props.children}</div>
   </ToastPrimitive.Root>
-))
-TrialToast.displayName = ToastPrimitive.Root.displayName
+));
+TrialToast.displayName = ToastPrimitive.Root.displayName;
 
 const ToastAction = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Action>,
@@ -107,8 +107,8 @@ const ToastAction = React.forwardRef<
     )}
     {...props}
   />
-))
-ToastAction.displayName = ToastPrimitive.Action.displayName
+));
+ToastAction.displayName = ToastPrimitive.Action.displayName;
 
 const ToastTitle = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Title>,
@@ -119,8 +119,8 @@ const ToastTitle = React.forwardRef<
     className={cn("text-[0.7rem] font-medium text-zinc-900", className)}
     {...props}
   />
-))
-ToastTitle.displayName = ToastPrimitive.Title.displayName
+));
+ToastTitle.displayName = ToastPrimitive.Title.displayName;
 
 const ToastDescription = React.forwardRef<
   React.ElementRef<typeof ToastPrimitive.Description>,
@@ -131,10 +131,10 @@ const ToastDescription = React.forwardRef<
     className={cn("text-[0.65rem] text-zinc-600", className)}
     {...props}
   />
-))
-ToastDescription.displayName = ToastPrimitive.Description.displayName
+));
+ToastDescription.displayName = ToastPrimitive.Description.displayName;
 
-export type { ToastProps, ToastVariant }
+export type { ToastProps, ToastVariant };
 export {
   ToastProvider,
   ToastViewport,
@@ -142,5 +142,5 @@ export {
   TrialToast,
   ToastAction,
   ToastTitle,
-  ToastDescription
-}
+  ToastDescription,
+};

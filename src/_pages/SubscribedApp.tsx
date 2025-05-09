@@ -11,6 +11,8 @@ interface SubscribedAppProps {
   setLanguage: (language: string) => void;
   currentTheme: string;
   setTheme: (theme: string) => void;
+  updateAvailable: boolean;
+  updateDownloaded: boolean;
 }
 
 const SubscribedApp: React.FC<SubscribedAppProps> = ({
@@ -19,11 +21,14 @@ const SubscribedApp: React.FC<SubscribedAppProps> = ({
   setLanguage,
   currentTheme,
   setTheme,
+  updateAvailable,
+  updateDownloaded,
 }) => {
   const queryClient = useQueryClient();
   const [view, setView] = useState<"queue" | "solutions" | "debug">("queue");
   const containerRef = useRef<HTMLDivElement>(null);
   const { showToast } = useToast();
+  const showUpdateNotification = updateAvailable || updateDownloaded;
 
   // Let's ensure we reset queries etc. if some electron signals happen
   useEffect(() => {
@@ -129,7 +134,12 @@ const SubscribedApp: React.FC<SubscribedAppProps> = ({
   }, [view]);
 
   return (
-    <div ref={containerRef} className={`min-h-0 ${currentTheme} w-fit`}>
+    <div
+      ref={containerRef}
+      className={`min-h-0 ${currentTheme} ${
+        showUpdateNotification ? "w-[290px]" : "w-fit"
+      }`}
+    >
       {view === "queue" ? (
         <Queue
           setView={setView}

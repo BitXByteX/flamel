@@ -47,6 +47,8 @@ function App() {
   const [currentLanguage, setCurrentLanguage] = useState<string>("python");
   const [isInitialized, setIsInitialized] = useState(false);
   const [showTrialToast, setShowTrialToast] = useState(false);
+  const [updateAvailable, setUpdateAvailable] = useState(false);
+  const [updateDownloaded, setUpdateDownloaded] = useState(false);
 
   // Helper function to safely update credits
   const updateCredits = useCallback((newCredits: number) => {
@@ -314,8 +316,15 @@ function App() {
             isTrialModeHandleScreenCaptureProtection={
               isTrialModeHandleScreenCaptureProtection
             }
+            updateAvailable={updateAvailable}
+            updateDownloaded={updateDownloaded}
           />
-          <UpdateNotification />
+          <UpdateNotification
+            updateAvailable={updateAvailable}
+            setUpdateAvailable={setUpdateAvailable}
+            updateDownloaded={updateDownloaded}
+            setUpdateDownloaded={setUpdateDownloaded}
+          />
           <TrialToast
             open={showTrialToast}
             variant={toastState.variant}
@@ -332,7 +341,9 @@ function App() {
             <ToastTitle>{toastState.title}</ToastTitle>
             <ToastDescription>{toastState.description}</ToastDescription>
           </Toast>
-          <ToastViewport />
+          <ToastViewport
+            className={showTrialToast ? "animate-marquee top-1 p-1" : ""}
+          />
         </ToastContext.Provider>
       </ToastProvider>
     </QueryClientProvider>
@@ -646,10 +657,14 @@ function AppContent({
   isInitialized,
   isTrialModeHandleScreenCaptureProtection,
   showTrialToast,
+  updateAvailable,
+  updateDownloaded,
 }: {
   isInitialized: boolean;
   isTrialModeHandleScreenCaptureProtection: any;
   showTrialToast: any;
+  updateAvailable: boolean;
+  updateDownloaded: boolean;
 }) {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
@@ -860,6 +875,8 @@ function AppContent({
       setLanguage={setCurrentLanguage}
       currentTheme={currentTheme}
       setTheme={setCurrentTheme}
+      updateAvailable={updateAvailable}
+      updateDownloaded={updateDownloaded}
     />
   );
 }

@@ -3,9 +3,14 @@ import { Dialog, DialogContent } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { useToast } from "../contexts/toast";
 
-export const UpdateNotification: React.FC = () => {
-  const [updateAvailable, setUpdateAvailable] = useState(false);
-  const [updateDownloaded, setUpdateDownloaded] = useState(false);
+export const UpdateNotification: React.FC<any> = ({
+  updateAvailable,
+  setUpdateAvailable,
+  updateDownloaded,
+  setUpdateDownloaded,
+}) => {
+  // const [updateAvailable, setUpdateAvailable] = useState(false);
+  // const [updateDownloaded, setUpdateDownloaded] = useState(false);
   const [isDownloading, setIsDownloading] = useState(false);
   const { showToast } = useToast();
 
