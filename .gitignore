@@ -1,0 +1,29 @@
+# Pasta do ambiente virtual Python
+venv/
+.venv/
+env/
+
+# Arquivos de Cache e Build
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.$py.class
+
+# IDEs (se usar)
+.idea/
+.vscode/
+
+# Django/Banco de Dados
+# O arquivo do banco de dados SQLite que o Django cria
+db.sqlite3
+*.sqlite3
+
+# Arquivos de Mídia de Upload (Muito importante para o Flamel!)
+# Não queremos comitar todos os PDFs e áudios que os usuários fizerem upload
+/media/
+
+# Logs e Arquivos de Configuração Local
+*.log
+.DS_Store # Mac OS
+Thumbs.db # Windows
