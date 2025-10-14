@@ -51,7 +51,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # Adicione a configuração para o HTMX (para desenvolvimento)
-LOGIN_REDIRECT_URL = '/' # Se você quiser que o login redirecione para a raiz
+LOGIN_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -134,3 +134,47 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# flamel_project/flamel_project/settings.py
+
+# ... (código existente termina aqui) ...
+
+# ----------------------------------------
+# CONFIGURAÇÃO CELERY/REDIS
+# ----------------------------------------
+
+# 1. URL do broker (Fila de tarefas). Usa Redis na porta padrão (6379).
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0' 
+
+# 2. URL onde o Celery armazena os resultados (o status: SUCESSO, FALHA, etc.)
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/0'
+
+# 3. Formato de Serialização (Recomendado)
+CELERY_TASK_SERIALIZER = 'json' 
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_ACCEPT_CONTENT = ['json'] 
+CELERY_TIMEZONE = 'America/Sao_Paulo'
+CELERY_ENABLE_UTC = False
+
+# ----------------------------------------
+# CONFIGURAÇÃO DE TEMPLATES (CORREÇÃO DE CAMINHO)
+# ----------------------------------------
+
+# Se você vai usar uma pasta /templates na raiz do projeto, 
+# precisa adicionar o caminho aqui (não está no seu código acima):
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # ADICIONE ESTA LINHA:
+        'DIRS': [BASE_DIR / 'templates'], 
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
