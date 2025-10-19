@@ -1,12 +1,7 @@
-from django.db import models
-
-
-# Create your models here.
 # flamel_project/transmutacao/models.py
 
 from django.db import models
-from django.contrib.auth.models import User # Vamos usar o modelo de User padrão do Django
-
+from django.contrib.auth.models import User
 # Constantes para os tipos de transmutação (Opções do Dashboard)
 TIPOS_TRANSFORMACAO = (
     ('MELHORAR_PDF', 'Melhorar Legibilidade PDF'),
@@ -22,15 +17,13 @@ STATUS_TAREFA = (
     ('FALHA', 'Falha no Processamento'),
 )
 
-class DocumentoProcessado(models.Model):
-    # Rastreamento do Usuário (Para o futuro, por enquanto será apenas um mock)
-    # Supondo que você usará o modelo padrão de usuário.
-    # Se você não for implementar o login real, pode manter o campo nulo.
-    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
 
-    # -------------------
+class DocumentoProcessado(models.Model):
+    # Rastreamento do Usuário
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE, null=True,
+                                blank=True)
+
     # DADOS DO UPLOAD
-    # -------------------
     arquivo_original = models.FileField(
         upload_to='originais/', 
         verbose_name='PDF Original'
@@ -38,13 +31,11 @@ class DocumentoProcessado(models.Model):
     
     tipo_transfomacao = models.CharField(
         max_length=50,
-        choices=TIPOS_TRANSFORMACAO,
+        choices=TIPOS_TRANSFORMACAO, # Usa a constante definida acima
         verbose_name='Tipo de Transformação'
     )
     
-    # -------------------
     # DADOS DO PROCESSAMENTO ASSÍNCRONO (CELERY)
-    # -------------------
     task_id = models.CharField(
         max_length=255,
         null=True,
@@ -60,10 +51,7 @@ class DocumentoProcessado(models.Model):
         verbose_name='Status da Tarefa'
     )
 
-    # -------------------
     # RESULTADO
-    # -------------------
-    # Armazena o arquivo de saída (PDF melhorado, TXT, ou MP3)
     arquivo_resultado = models.FileField(
         upload_to='resultados/', 
         null=True, 
@@ -71,7 +59,6 @@ class DocumentoProcessado(models.Model):
         verbose_name='Arquivo de Resultado'
     )
 
-    # Pode ser útil para debug ou para exibir uma mensagem de erro
     log_processamento = models.TextField(
         null=True, 
         blank=True, 
