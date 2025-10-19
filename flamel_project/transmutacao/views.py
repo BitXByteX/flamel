@@ -5,8 +5,13 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 
+# DRF
+from rest_framework.decorators import api_view, permission_classes # <-- ADICIONADO permission_classes
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+
 # Importações do Módulo
-from .models import DocumentoProcessado
+from .models import DocumentoProcessado, TIPOS_TRANSFORMACAO
 from .serializers import DocumentoProcessadoSerializer
 from .task import processar_documento_task
 
@@ -29,17 +34,19 @@ def dashboard_view(request):
 
 
 @api_view(['GET', 'POST'])
+@permission_classes([AllowAny])
 def upload_file_view(request):
     """
     1. GET: Renderiza a tela de upload.
     2. POST: Recebe o arquivo, salva no DB e dispara a tarefa Celery.
     """
 
+    # ... (dentro da upload_file_view, bloco GET)
     if request.method == 'GET':
         mode = request.GET.get('mode', None)
-        
-        # Validação simples
-        if mode not in [c[0] for c in DocumentoProcessado.TIPOS_TRANSFORMACAO]:
+
+        # Use TIPOS_TRANSFORMACAO diretamente
+        if mode not in [c[0] for c in TIPOS_TRANSFORMACAO]: 
             return render(request, 'error.html', {'message': 'Modo de transformação inválido.'})
 
         return render(request, 'transmutacao/upload.html', {'mode': mode})

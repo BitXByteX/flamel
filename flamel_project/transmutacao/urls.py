@@ -4,11 +4,11 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # 1. Login (Simulação)
-    path('', views.login_mock_view, name='login'), 
     
-    # 2. Dashboard 
-    path('dashboard/', views.dashboard_view, name='dashboard'), 
+    path('', views.dashboard_view, name='dashboard'),
+
+    # 1. Login (Simulação)
+    path('login/', views.login_mock_view, name='login'), 
     
     # 3. ENDPOINT DE UPLOAD (SOLUÇÃO DO ERRO)
     path('upload/', views.upload_file_view, name='upload_file'),
