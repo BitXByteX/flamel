@@ -1,12 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.http import HttpResponse, FileResponse
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-
 
 # DRF
-from rest_framework.decorators import api_view, permission_classes # <-- ADICIONADO permission_classes
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 
@@ -47,9 +44,10 @@ def upload_file_view(request):
 
         # Use TIPOS_TRANSFORMACAO diretamente
         if mode not in [c[0] for c in TIPOS_TRANSFORMACAO]: 
-            return render(request, 'error.html', {'message': 'Modo de transformação inválido.'})
+            return render(request, 'error.html', {'message': 'Modo de '
+                             'transformaçãos''inválido.'})
 
-        return render(request, 'transmutacao/upload.html', {'mode': mode})
+        return render(request, 'upload.html', {'mode': mode})
 
     # 2. Requisição POST (Upload do arquivo - A Lógica Corrigida do DRF)
     elif request.method == 'POST':
@@ -74,14 +72,14 @@ def upload_file_view(request):
             doc_instance.save()
 
             # Resposta para o HTMX (para iniciar o polling)
-            return render(request, 'transmutacao/_status_area.html', {
+            return render(request, '_status_area.html', {
                 'documento': doc_instance,
             })
         
         # Se falhar (serializer não é válido, ex: arquivo faltando)
-        return render(request, 'transmutacao/upload.html', {
-            'mode': request.data.get('tipo_transfomacao'),
-            'errors': serializer.errors 
+        return render(request, 'upload.html', {
+                    'mode': mode,
+                    'errors': serializer.errors
         })
 
 # ----------------------------------------
@@ -98,18 +96,18 @@ def task_status_view(request, task_id):
         documento = DocumentoProcessado.objects.get(task_id=task_id)
 
         if documento.status == 'SUCESSO':
-            return render(request, 'transmutacao/download.html',
+            return render(request, 'download.html',
                           {'documento': documento})
 
         elif documento.status == 'FALHA':
-            return render(request, 'transmutacao/_status_fail.html',
+            return render(request, '_status_fail.html',
                           {'documento': documento})
         else: # PENDENTE ou PROCESSANDO
-            return render(request, 'transmutacao/_status_area.html',
+            return render(request, '_status_area.html',
                           {'documento': documento})
 
     except DocumentoProcessado.DoesNotExist:
-        return render(request, 'transmutacao/_status_fail.html', {
+        return render(request, '_status_fail.html', {
             'documento': None,
             'error_msg': f"Tarefa {task_id} não encontrada no banco de dados."
         })
