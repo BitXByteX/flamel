@@ -1,0 +1,21 @@
+<div id="content-area">
+    <h2 class="text-center text-success mb-4">✅ Transmutação Concluída!</h2>
+    <p class="text-center text-light">Seu arquivo está pronto para ser baixado. Tarefa #{{ documento.id }}.</p>
+
+    <div class="d-flex flex-column align-items-center mt-5">
+        
+        <a href="{% url 'download_file' file_id=documento.id %}" 
+           class="btn btn-primary btn-lg mb-4" 
+           role="button">
+            Baixar Arquivo ({{ documento.tipo_transfomacao }})
+        </a>
+
+        <button type="button" 
+                class="btn btn-outline-secondary"
+                hx-get="{% url 'dashboard' %}"
+                hx-target="#content-area"
+                hx-swap="outerHTML">
+            &larr; Voltar
+        </button>
+    </div>
+</div>
