@@ -10,7 +10,7 @@ from rest_framework.permissions import AllowAny
 # Importações do Módulo
 from .models import DocumentoProcessado, TIPOS_TRANSFORMACAO
 from .serializers import DocumentoProcessadoSerializer
-from .task import processar_documento_task
+from .tasks import processar_documento_task
 
 
 def login_mock_view(request):
@@ -38,18 +38,19 @@ def upload_file_view(request):
     2. POST: Recebe o arquivo, salva no DB e dispara a tarefa Celery.
     """
 
-    # ... (dentro da upload_file_view, bloco GET)
+    # 1. Requisição GET (Vindo do Dashboard)
     if request.method == 'GET':
         mode = request.GET.get('mode', None)
 
-        # Use TIPOS_TRANSFORMACAO diretamente
+        # Validação do modo: Corrigido o erro de aspas e formatação de string
         if mode not in [c[0] for c in TIPOS_TRANSFORMACAO]: 
-            return render(request, 'error.html', {'message': 'Modo de '
-                             'transformaçãos''inválido.'})
+            return render(request, 'error.html', {
+                'message': 'Modo de transformação inválido.'
+            })
 
         return render(request, 'upload.html', {'mode': mode})
 
-    # 2. Requisição POST (Upload do arquivo - A Lógica Corrigida do DRF)
+    # 2. Requisição POST (Upload do arquivo)
     elif request.method == 'POST':
         
         # --- LÓGICA DE UPLOAD E SERIALIZAÇÃO DO DRF ---
@@ -120,6 +121,7 @@ def download_file_view(request, file_id):
     documento = get_object_or_404(DocumentoProcessado, pk=file_id)  
     if not documento.arquivo_resultado:
         return HttpResponse("Arquivo de resultado não encontrado. Houve um erro interno.", status=404) 
+    
     # Prepara a resposta para o download
     response = FileResponse(documento.arquivo_resultado, as_attachment=True)
 
