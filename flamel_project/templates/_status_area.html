@@ -12,14 +12,15 @@
     <p class="text-center mt-3 text-secondary">
         Tarefa #{{ documento.id }} (ID Celery: {{ documento.task_id }})
     </p>
-</div>
 
-<div class="d-flex justify-content-center mt-5">
-    <button type="button" 
-            class="btn btn-outline-secondary"
-            hx-get="{% url 'dashboard' %}"
-            hx-target="#content-area"
-            hx-swap="outerHTML">
-        &larr; Voltar
-    </button>
+    <!-- O BOTÃO VOLTAR FICA AQUI PARA GARANTIR QUE APENAS UM APARECE -->
+    <div class="d-flex justify-content-center mt-5">
+        <button type="button" 
+                class="btn btn-outline-secondary"
+                hx-get="{% url 'dashboard' %}"
+                hx-target="#content-area"
+                hx-swap="outerHTML">
+            &larr; Voltar
+        </button>
+    </div>
 </div>
