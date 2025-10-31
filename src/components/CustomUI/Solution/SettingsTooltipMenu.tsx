@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { COMMAND_KEY } from "../../../utils/platform";
 import { LanguageSelector } from "../../shared/LanguageSelector";
 import { ThemeSelector } from "../../shared/ThemeSelector";
+import { version } from "../../../../package.json";
 
 const SettingsTooltipMenu: React.FC<any> = ({
   showToast,
@@ -341,6 +342,14 @@ const SettingsTooltipMenu: React.FC<any> = ({
                   https://www.crackcodinginterview.com/dashboard
                 </span>
               </div> */}
+            </div>
+
+            {/* App version */}
+            <div className="mb-3 px-2 space-y-1">
+              <div className="flex items-center justify-between text-[13px] font-medium text-white/90">
+                <span>App Version</span>
+                <span>{version}</span>
+              </div>
             </div>
 
             <button

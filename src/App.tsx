@@ -19,6 +19,7 @@ import {
 } from "./components/ui/toast";
 import { ToastContext } from "./contexts/toast";
 import AbsoluteBackDrop from "./components/ui/AbsoluteBackDrop/AbsoluteBackDrop";
+import { version } from "../package.json";
 
 // Create a React Query client
 const queryClient = new QueryClient({
@@ -632,6 +633,8 @@ function AuthForm() {
                     : "Don't have an account? Sign up →"}
                 </p>
               </button>
+
+              <p className="text-center text-sm text-white/80">{`App version: ${version}`}</p>
 
               {/* <p className="text-[#e1e3e1] text-xs text-center">
                 To login with different google account{" "}
